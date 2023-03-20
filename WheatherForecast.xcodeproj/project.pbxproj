@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4107EF7B29C8D87A009C24C1 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107EF7A29C8D87A009C24C1 /* CustomViews.swift */; };
 		4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256529C8503200CCE6D4 /* AppDelegate.swift */; };
 		4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256729C8503200CCE6D4 /* SceneDelegate.swift */; };
 		4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256929C8503200CCE6D4 /* SettingViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4107EF7A29C8D87A009C24C1 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		4171256229C8503200CCE6D4 /* WheatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4171256529C8503200CCE6D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4171256729C8503200CCE6D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4107EF7C29C8DB42009C24C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4107EF7A29C8D87A009C24C1 /* CustomViews.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4171255929C8503200CCE6D4 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +73,7 @@
 				4171257E29C8637700CCE6D4 /* App */,
 				4171257929C8623500CCE6D4 /* ViewControllers */,
 				4171258129C868A600CCE6D4 /* Models */,
+				4107EF7C29C8DB42009C24C1 /* Views */,
 				4171256E29C8503200CCE6D4 /* Assets.xcassets */,
 				4171257329C8503200CCE6D4 /* Info.plist */,
 			);
@@ -171,6 +182,7 @@
 				4171258029C8639000CCE6D4 /* Colors.swift in Sources */,
 				4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */,
 				4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */,
+				4107EF7B29C8D87A009C24C1 /* CustomViews.swift in Sources */,
 				4171257B29C8624900CCE6D4 /* MainViewController.swift in Sources */,
 				4171257D29C8628A00CCE6D4 /* PermissionViewController.swift in Sources */,
 			);
@@ -303,6 +315,7 @@
 				DEVELOPMENT_TEAM = M59369L9JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WheatherForecast/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -313,6 +326,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = aserdiuk.WheatherForecast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -329,6 +345,7 @@
 				DEVELOPMENT_TEAM = M59369L9JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WheatherForecast/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -339,6 +356,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = aserdiuk.WheatherForecast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

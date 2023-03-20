@@ -10,3 +10,7 @@ import Foundation
 let permissionTitle = "Разрешить приложению  Weather использовать данные о местоположении вашего устройства"
 let permissionSubtitle1 = "Чтобы получить более точные прогнозы погоды во время движения или путешествия"
 let permissionSubtitle2 = "Вы можете изменить свой выбор в любое время из меню приложения"
+let permissionAcceptButtonTitle = "ИСПОЛЬЗОВАТЬ МЕСТОПОЛОЖЕНИЕ УСТРОЙСТВА"
+let permissionDeclineButtonTitle = "НЕТ, Я БУДУ ДОБАВЛЯТЬ ЛОКАЦИИ"
+
+let settingsTitle = "Настройки"

@@ -9,50 +9,39 @@ import UIKit
 
 class PermissionViewController: UIViewController {
 
-    private lazy var imageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "permissionImage")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private lazy var imageView = CVImage(imageName: "permissionImage")
 
-    private lazy var titleLabel : UILabel = {
-        let label = UILabel()
-        label.text = permissionTitle
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = Colors.textWhite.color
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var titleLabel = CVLabel(
+        text: permissionTitle,
+        size: 16,
+        weight: .bold,
+        color: .textWhite,
+        numberOfLines: 0,
+        textAlignment: .center
+    )
 
-    private lazy var subtitle1Label : UILabel = {
-        let label = UILabel()
-        label.text = permissionSubtitle1
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = Colors.textWhite.color
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var subtitle1Label = CVLabel(
+        text: permissionSubtitle1,
+        size: 14,
+        weight: .regular,
+        color: .textWhite,
+        numberOfLines: 0,
+        textAlignment: .center
+    )
 
-    private lazy var subtitle2Label : UILabel = {
-        let label = UILabel()
-        label.text = permissionSubtitle2
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = Colors.textWhite.color
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
+    private lazy var subtitle2Label = CVLabel(
+        text: permissionSubtitle2,
+        size: 14,
+        weight: .regular,
+        color: .textWhite,
+        numberOfLines: 0,
+        textAlignment: .center
+    )
+    
     private lazy var acceptButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("ИСПОЛЬЗОВАТЬ МЕСТОПОЛОЖЕНИЕ УСТРОЙСТВА", for: .normal)
+        button.setTitle(permissionAcceptButtonTitle, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         button.backgroundColor = Colors.orange.color
         button.layer.cornerRadius = 10
@@ -62,7 +51,7 @@ class PermissionViewController: UIViewController {
     private lazy var declineButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("НЕТ, Я БУДУ ДОБАВЛЯТЬ ЛОКАЦИИ", for: .normal)
+        button.setTitle(permissionDeclineButtonTitle, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return button
     }()
