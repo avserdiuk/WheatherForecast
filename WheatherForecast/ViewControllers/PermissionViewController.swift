@@ -12,49 +12,39 @@ class PermissionViewController: UIViewController {
     private lazy var imageView = CVImage(imageName: "permissionImage")
 
     private lazy var titleLabel = CVLabel(
-        text: permissionTitle,
-        size: 16,
-        weight: .bold,
+        text: permissionTitle, size: 16, weight: .bold,
         color: .textWhite,
         numberOfLines: 0,
         textAlignment: .center
     )
 
     private lazy var subtitle1Label = CVLabel(
-        text: permissionSubtitle1,
-        size: 14,
-        weight: .regular,
+        text: permissionSubtitle1, size: 14, weight: .regular,
         color: .textWhite,
         numberOfLines: 0,
         textAlignment: .center
     )
 
     private lazy var subtitle2Label = CVLabel(
-        text: permissionSubtitle2,
-        size: 14,
-        weight: .regular,
+        text: permissionSubtitle2, size: 14, weight: .regular,
         color: .textWhite,
         numberOfLines: 0,
         textAlignment: .center
     )
-    
-    private lazy var acceptButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(permissionAcceptButtonTitle, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        button.backgroundColor = Colors.orange.color
-        button.layer.cornerRadius = 10
-        return button
-    }()
 
-    private lazy var declineButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(permissionDeclineButtonTitle, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        return button
-    }()
+    private lazy var acceptButton = CVButton(
+        title: permissionAcceptButtonTitle,
+        titleSize: 12,
+        titleWeight: .bold,
+        backgroundColor: .orange,
+        cornerRadius: 10
+    )
+
+    private lazy var declineButton = CVButton(
+        title: permissionDeclineButtonTitle,
+        titleSize: 16,
+        titleWeight: .regular
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()

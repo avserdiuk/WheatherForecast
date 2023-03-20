@@ -21,7 +21,7 @@ class SettingViewController: UIViewController {
         return view
     }()
 
-    private lazy var settingTitle = CVLabel(text: "Настройка", size: 18, weight: .bold)
+    private lazy var settingTitle = CVLabel(text: settingsTitle, size: 18, weight: .bold, color: .textBlack)
 
     private lazy var settingItemStack : UIStackView = {
         let stackView = UIStackView()
@@ -36,15 +36,7 @@ class SettingViewController: UIViewController {
     private lazy var settingItem3Label = CVLabel(text: "Формат времени", size: 16, weight: .regular, color: .textGray)
     private lazy var settingItem4Label = CVLabel(text: "Уведомления", size: 16, weight: .regular, color: .textGray)
 
-
-    private lazy var button : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Установить", for: .normal)
-        button.backgroundColor = Colors.orange.color
-        button.layer.cornerRadius = 10
-        return button
-    }()
+    private lazy var button = CVButton(title: "Установить", titleSize: 16, backgroundColor: .orange, cornerRadius: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()

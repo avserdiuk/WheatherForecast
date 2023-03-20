@@ -9,11 +9,12 @@ import Foundation
 import UIKit
 
 enum Colors {
-    case accentBlue
     case textWhite
     case textGray
+    case textBlack
     case orange
-    case textbBlack
+    case accentBlue
+    case transparent
 
     var color: UIColor {
 
@@ -26,8 +27,10 @@ enum Colors {
                 return UIColor(red: 0.949, green: 0.431, blue: 0.067, alpha: 1)
             case .textGray:
                 return UIColor(red: 0.538, green: 0.513, blue: 0.513, alpha: 1)
-            case .textbBlack:
+            case .textBlack:
                 return UIColor(red: 0.153, green: 0.153, blue: 0.133, alpha: 1)
+            case .transparent:
+                return UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }
     }
 }
