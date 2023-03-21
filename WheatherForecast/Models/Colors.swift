@@ -12,6 +12,7 @@ enum Colors {
     case textWhite
     case textGray
     case textBlack
+    case textGold
     case orange
     case accentBlue
     case transparent
@@ -29,6 +30,8 @@ enum Colors {
                 return UIColor(red: 0.538, green: 0.513, blue: 0.513, alpha: 1)
             case .textBlack:
                 return UIColor(red: 0.153, green: 0.153, blue: 0.133, alpha: 1)
+            case .textGold:
+                return UIColor(red: 0.965, green: 0.867, blue: 0.004, alpha: 1)
             case .transparent:
                 return UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }

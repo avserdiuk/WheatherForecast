@@ -58,3 +58,30 @@ class CVButton : UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class CVView : UIView {
+    init(backgroundColor: Colors = .transparent){
+        super.init(frame: .zero)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = backgroundColor.color
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class CVStackView : UIStackView {
+    init(axis : NSLayoutConstraint.Axis = .horizontal, spacing : CGFloat = 0, alignment : UIStackView.Alignment = .center){
+        super.init(frame: .zero)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.axis = axis
+        self.spacing = spacing
+        self.alignment = alignment
+    }
+
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
