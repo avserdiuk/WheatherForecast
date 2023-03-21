@@ -45,13 +45,13 @@ class CVImage : UIImageView {
 }
 
 class CVButton : UIButton {
-    init(title: String, titleSize: CGFloat = 12, titleWeight: UIFont.Weight = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
+    init(title: String, titleColor : Colors = .textBlack, titleSize: CGFloat = 12, titleWeight: UIFont.Weight = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(title, for: .normal)
         self.backgroundColor = backgroundColor.color
         self.layer.cornerRadius = cornerRadius
-        self.titleLabel?.font = UIFont.systemFont(ofSize: titleSize, weight: titleWeight)
+        self.setTitleColor(titleColor.color, for: .normal)
     }
     
     required init?(coder: NSCoder) {
@@ -60,10 +60,11 @@ class CVButton : UIButton {
 }
 
 class CVView : UIView {
-    init(backgroundColor: Colors = .transparent){
+    init(backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = backgroundColor.color
+        self.layer.cornerRadius = cornerRadius
     }
 
     required init?(coder: NSCoder) {
@@ -72,7 +73,7 @@ class CVView : UIView {
 }
 
 class CVStackView : UIStackView {
-    init(axis : NSLayoutConstraint.Axis = .horizontal, spacing : CGFloat = 0, alignment : UIStackView.Alignment = .center){
+    init(axis : NSLayoutConstraint.Axis = .horizontal, spacing : CGFloat = 0, alignment : UIStackView.Alignment = .fill){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = axis

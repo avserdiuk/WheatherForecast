@@ -13,24 +13,10 @@ class SettingViewController: UIViewController {
     private lazy var cloud2ImageView = CVImage(imageName: "cloud2")
     private lazy var cloud3ImageView = CVImage(imageName: "cloud3")
 
-    private lazy var wrapperView : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1)
-        view.layer.cornerRadius = 10
-        return view
-    }()
-
+    private lazy var wrapperView = CVView(backgroundColor: .backgroundWhite, cornerRadius: 10)
     private lazy var settingTitle = CVLabel(text: settingsTitle, size: 18, weight: .bold, color: .textBlack)
 
-    private lazy var settingItemStack : UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 30
-        return stackView
-    }()
-
+    private lazy var settingItemStack = CVStackView(axis: .vertical, spacing: 30)
     private lazy var settingItem1Label = CVLabel(text: "Температура", size: 16, weight: .regular, color: .textGray)
     private lazy var settingItem2Label = CVLabel(text: "Скорость ветра", size: 16, weight: .regular, color: .textGray)
     private lazy var settingItem3Label = CVLabel(text: "Формат времени", size: 16, weight: .regular, color: .textGray)
