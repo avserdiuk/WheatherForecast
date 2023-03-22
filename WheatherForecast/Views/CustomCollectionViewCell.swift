@@ -9,17 +9,30 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
 
-    private lazy var image = CVImage(imageName: "cell")
+    private lazy var stackView = CVStackView(axis: .vertical, spacing: 5, alignment: .center)
+
+    private lazy var timeLabel = CVLabel(text: "12:00", size: 14, weight: .regular)
+    private lazy var imageView = CVImage(imageName: "sun24h")
+    private lazy var degreeLabel = CVLabel(text: "23", size: 16, weight: .regular)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(image)
+
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = Colors.borderBlue.color.cgColor
+        contentView.layer.cornerRadius = 22
+
+        addSubview(stackView)
+        stackView.addArrangedSubview(timeLabel)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(degreeLabel)
 
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            image.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
-            image.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
-            image.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+
+            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            stackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 3),
+            stackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -3),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
         ])
     }
 

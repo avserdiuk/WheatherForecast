@@ -21,7 +21,6 @@ class CustomTableHeader: UITableViewHeaderFooterView {
     private lazy var dayNightTempLabel = CVLabel(text: "7°/13°", size: 16, weight: .regular, color: .textWhite)
     private lazy var nowTempLabel = CVLabel(text: "13°", size: 36, weight: .bold, color: .textWhite)
     private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 16, weight: .semibold, color: .textWhite)
-    private lazy var toFix = CVLabel(text: "строка", size: 16, weight: .regular, color: .textWhite)
 
     private lazy var additionStackView = CVStackView(axis: .horizontal, spacing: 20)
 
@@ -56,7 +55,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         collection.dataSource = self
         collection.delegate = self
         collection.backgroundColor = Colors.transparent.color
-        collection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+        collection.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return collection
     }()
 
@@ -172,7 +171,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
             more24hButton.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: -16),
 
             more24hCollectionView.topAnchor.constraint(equalTo: more24hButton.bottomAnchor, constant: 10),
-            more24hCollectionView.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 16),
+            more24hCollectionView.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 0),
             more24hCollectionView.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: 0),
             more24hCollectionView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -24)
 

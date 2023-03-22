@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
         table.backgroundColor = .white
         table.allowsSelection = false
         table.showsVerticalScrollIndicator = false
+        table.separatorColor = .clear
         return table
     }()
 
