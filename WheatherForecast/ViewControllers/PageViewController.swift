@@ -52,11 +52,14 @@ class PageViewController: UIViewController {
 
     func setNavigationBar(){
         title = "Омск, Россия"
+
         let menu = UIBarButtonItem(image: UIImage(named: "menu"), style: .done, target: self, action: nil)
         let point = UIBarButtonItem(image: UIImage(named: "point"), style: .done, target: self, action: nil)
+
         navigationItem.leftBarButtonItems = [menu]
         navigationItem.rightBarButtonItems = [point]
         navigationController?.navigationBar.tintColor = .black
+
     }
     
 }

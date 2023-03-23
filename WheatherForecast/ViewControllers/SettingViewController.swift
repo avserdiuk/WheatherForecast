@@ -17,12 +17,18 @@ class SettingViewController: UIViewController {
     private lazy var settingTitle = CVLabel(text: settingsTitle, size: 18, weight: .bold, color: .textBlack)
 
     private lazy var settingItemStack = CVStackView(axis: .vertical, spacing: 30)
-    private lazy var settingItem1Label = CVLabel(text: "Температура", size: 16, weight: .regular, color: .textGray)
-    private lazy var settingItem2Label = CVLabel(text: "Скорость ветра", size: 16, weight: .regular, color: .textGray)
-    private lazy var settingItem3Label = CVLabel(text: "Формат времени", size: 16, weight: .regular, color: .textGray)
-    private lazy var settingItem4Label = CVLabel(text: "Уведомления", size: 16, weight: .regular, color: .textGray)
+    private lazy var settingItem1Label = CVLabel(text: settingsItem1, size: 16, weight: .regular, color: .textGray)
+    private lazy var settingItem2Label = CVLabel(text: settingsItem2, size: 16, weight: .regular, color: .textGray)
+    private lazy var settingItem3Label = CVLabel(text: settingsItem3, size: 16, weight: .regular, color: .textGray)
+    private lazy var settingItem4Label = CVLabel(text: settingsItem4, size: 16, weight: .regular, color: .textGray)
 
-    private lazy var button = CVButton(title: "Установить", titleSize: 16, backgroundColor: .orange, cornerRadius: 10)
+    private lazy var button = CVButton(
+        title: settingsButtonLabel,
+        titleSize: 16,
+        titleColor: .textWhite,
+        titleWeight: .semibold,
+        backgroundColor: .orange,
+        cornerRadius: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()

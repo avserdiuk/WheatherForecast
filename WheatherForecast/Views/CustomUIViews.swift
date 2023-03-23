@@ -1,5 +1,5 @@
 //
-//  CustomViews.swift
+//  CustomUIViews.swift
 //  WheatherForecast
 //
 //  Created by Алексей Сердюк on 21.03.2023.
@@ -45,13 +45,15 @@ class CVImage : UIImageView {
 }
 
 class CVButton : UIButton {
-    init(title: String, titleColor : Colors = .textBlack, titleSize: CGFloat = 12, titleWeight: UIFont.Weight = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
+    init(title: String, titleSize: CGFloat, titleColor : Colors = .textBlack, titleWeight: UIFont.Weight = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(title, for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: titleSize, weight: titleWeight)
+        self.setTitleColor(titleColor.color, for: .normal)
         self.backgroundColor = backgroundColor.color
         self.layer.cornerRadius = cornerRadius
-        self.setTitleColor(titleColor.color, for: .normal)
+
     }
     
     required init?(coder: NSCoder) {

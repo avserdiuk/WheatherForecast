@@ -14,3 +14,12 @@ let permissionAcceptButtonTitle = "ИСПОЛЬЗОВАТЬ МЕСТОПОЛОЖ
 let permissionDeclineButtonTitle = "НЕТ, Я БУДУ ДОБАВЛЯТЬ ЛОКАЦИИ"
 
 let settingsTitle = "Настройки"
+let settingsItem1 = "Температура"
+let settingsItem2 = "Скорость ветра"
+let settingsItem3 = "Формат времени"
+let settingsItem4 = "Уведомления"
+let settingsButtonLabel = "Установить"
+
+let mainTableHeaderAdditionTitle = "Подробнее на 24 часа"
+let mainSectionHeaderTitle = "Ежедневный прогноз"
+let mainSectionHeaderAdditionTitle = "25 дней"

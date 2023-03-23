@@ -20,6 +20,16 @@ class CustomTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setViews()
+        setConstraints()
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setViews(){
         addSubview(wrapper)
         wrapper.addSubview(dateLabel)
         wrapper.addSubview(rainImage)
@@ -28,9 +38,11 @@ class CustomTableViewCell: UITableViewCell {
         wrapper.addSubview(degreeLabel)
         wrapper.addSubview(arrorImage)
 
+    }
+
+    func setConstraints(){
         NSLayoutConstraint.activate([
 
-            wrapper.heightAnchor.constraint(equalToConstant: 56),
             wrapper.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             wrapper.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             wrapper.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
@@ -38,6 +50,7 @@ class CustomTableViewCell: UITableViewCell {
 
             dateLabel.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 6),
             dateLabel.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 10),
+            dateLabel.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -31),
 
             rainImage.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
             rainImage.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 10),
@@ -57,13 +70,7 @@ class CustomTableViewCell: UITableViewCell {
             arrorImage.leftAnchor.constraint(equalTo: degreeLabel.rightAnchor, constant: 10),
             arrorImage.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: -10),
 
-
         ])
-
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
 }

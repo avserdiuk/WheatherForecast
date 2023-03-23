@@ -38,7 +38,10 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
     private lazy var dataTimeLabel = CVLabel(text: "17:48,  пт 16 апреля", size: 16, weight: .semibold, color: .textGold)
 
-    private lazy var more24hButton = CVButton(title: "Подробнее на 24 часа", titleSize: 16, titleWeight: .semibold)
+    private lazy var more24hButton = CVButton(
+        title: mainTableHeaderAdditionTitle,
+        titleSize: 16,
+        titleWeight: .regular)
 
     private lazy var collectionLayout : UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -181,7 +184,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
 extension CustomTableHeader : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        10
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

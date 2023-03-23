@@ -35,6 +35,7 @@ class PermissionViewController: UIViewController {
     private lazy var acceptButton = CVButton(
         title: permissionAcceptButtonTitle,
         titleSize: 12,
+        titleColor: .textWhite,
         titleWeight: .bold,
         backgroundColor: .orange,
         cornerRadius: 10
@@ -43,6 +44,7 @@ class PermissionViewController: UIViewController {
     private lazy var declineButton = CVButton(
         title: permissionDeclineButtonTitle,
         titleSize: 16,
+        titleColor: .textWhite,
         titleWeight: .regular
     )
 
