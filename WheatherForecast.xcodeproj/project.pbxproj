@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4107EF7B29C8D87A009C24C1 /* CustomUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107EF7A29C8D87A009C24C1 /* CustomUIViews.swift */; };
 		4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256529C8503200CCE6D4 /* AppDelegate.swift */; };
 		4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256729C8503200CCE6D4 /* SceneDelegate.swift */; };
 		4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256929C8503200CCE6D4 /* SettingViewController.swift */; };
@@ -15,9 +16,16 @@
 		4171257D29C8628A00CCE6D4 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */; };
 		4171258029C8639000CCE6D4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171257F29C8639000CCE6D4 /* Colors.swift */; };
 		4171258329C868BC00CCE6D4 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171258229C868BC00CCE6D4 /* Texts.swift */; };
+		41D9555E29C99DFD0000CFAB /* CustomTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */; };
+		41D9556029C9F6FB0000CFAB /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */; };
+		41D9556229C9FD3D0000CFAB /* CustomSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */; };
+		41D9556429C9FF530000CFAB /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9556329C9FF530000CFAB /* CustomTableViewCell.swift */; };
+		41D9556629CA031D0000CFAB /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9556529CA031D0000CFAB /* PageViewController.swift */; };
+		41E8171A29CB8804003665CD /* Forecast24ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8171929CB8804003665CD /* Forecast24ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4107EF7A29C8D87A009C24C1 /* CustomUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIViews.swift; sourceTree = "<group>"; };
 		4171256229C8503200CCE6D4 /* WheatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4171256529C8503200CCE6D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4171256729C8503200CCE6D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +36,12 @@
 		4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		4171257F29C8639000CCE6D4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4171258229C868BC00CCE6D4 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
+		41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableHeader.swift; sourceTree = "<group>"; };
+		41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSectionHeader.swift; sourceTree = "<group>"; };
+		41D9556329C9FF530000CFAB /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		41D9556529CA031D0000CFAB /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		41E8171929CB8804003665CD /* Forecast24ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast24ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4107EF7C29C8DB42009C24C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				41E8171B29CB888D003665CD /* MainScreen */,
+				4107EF7A29C8D87A009C24C1 /* CustomUIViews.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4171255929C8503200CCE6D4 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +86,7 @@
 				4171257E29C8637700CCE6D4 /* App */,
 				4171257929C8623500CCE6D4 /* ViewControllers */,
 				4171258129C868A600CCE6D4 /* Models */,
+				4107EF7C29C8DB42009C24C1 /* Views */,
 				4171256E29C8503200CCE6D4 /* Assets.xcassets */,
 				4171257329C8503200CCE6D4 /* Info.plist */,
 			);
@@ -72,9 +96,11 @@
 		4171257929C8623500CCE6D4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				41D9556529CA031D0000CFAB /* PageViewController.swift */,
 				4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */,
 				4171256929C8503200CCE6D4 /* SettingViewController.swift */,
 				4171257A29C8624900CCE6D4 /* MainViewController.swift */,
+				41E8171929CB8804003665CD /* Forecast24ViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -95,6 +121,17 @@
 				4171258229C868BC00CCE6D4 /* Texts.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		41E8171B29CB888D003665CD /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */,
+				41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */,
+				41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */,
+				41D9556329C9FF530000CFAB /* CustomTableViewCell.swift */,
+			);
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,10 +204,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */,
+				41D9556229C9FD3D0000CFAB /* CustomSectionHeader.swift in Sources */,
 				4171258329C868BC00CCE6D4 /* Texts.swift in Sources */,
 				4171258029C8639000CCE6D4 /* Colors.swift in Sources */,
 				4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */,
 				4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */,
+				41D9556429C9FF530000CFAB /* CustomTableViewCell.swift in Sources */,
+				4107EF7B29C8D87A009C24C1 /* CustomUIViews.swift in Sources */,
+				41D9556029C9F6FB0000CFAB /* CustomCollectionViewCell.swift in Sources */,
+				41E8171A29CB8804003665CD /* Forecast24ViewController.swift in Sources */,
+				41D9555E29C99DFD0000CFAB /* CustomTableHeader.swift in Sources */,
+				41D9556629CA031D0000CFAB /* PageViewController.swift in Sources */,
 				4171257B29C8624900CCE6D4 /* MainViewController.swift in Sources */,
 				4171257D29C8628A00CCE6D4 /* PermissionViewController.swift in Sources */,
 			);
@@ -303,6 +347,7 @@
 				DEVELOPMENT_TEAM = M59369L9JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WheatherForecast/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -313,6 +358,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = aserdiuk.WheatherForecast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -329,6 +377,7 @@
 				DEVELOPMENT_TEAM = M59369L9JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WheatherForecast/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -339,6 +388,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = aserdiuk.WheatherForecast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
