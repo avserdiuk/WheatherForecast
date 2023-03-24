@@ -16,7 +16,8 @@ class CVLabel : UILabel {
         weight: UIFont.Weight,
         color: Colors = .textBlack,
         numberOfLines: Int = 1,
-        textAlignment: NSTextAlignment = .left
+        textAlignment: NSTextAlignment = .left,
+        tag : Int = 0
     ){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +26,7 @@ class CVLabel : UILabel {
         self.textColor = color.color
         self.numberOfLines = numberOfLines
         self.textAlignment = textAlignment
+        self.tag = tag
     }
 
     required init?(coder: NSCoder) {
@@ -47,6 +49,7 @@ class CVImage : UIImageView {
 class CVButton : UIButton {
     init(title: String, titleSize: CGFloat, titleColor : Colors = .textBlack, titleWeight: UIFont.Weight = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
         super.init(frame: .zero)
+
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: titleSize, weight: titleWeight)

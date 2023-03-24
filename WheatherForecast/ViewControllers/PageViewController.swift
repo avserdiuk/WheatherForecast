@@ -28,26 +28,11 @@ class PageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
+
         setNavigationBar()
-
-        view.addSubview(pageControl)
-        view.addSubview(pageViewController.view)
-        pageViewController.setViewControllers([MainViewController()], direction: .forward, animated: true)
-
-        NSLayoutConstraint.activate([
-
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-
-            pageViewController.view.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 10),
-            pageViewController.view.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            pageViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            pageViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-        ])
-
-
+        setViews()
+        setConstraints()
     }
 
     func setNavigationBar(){
@@ -61,7 +46,26 @@ class PageViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
 
     }
-    
+
+    func setViews(){
+        view.addSubview(pageControl)
+        view.addSubview(pageViewController.view)
+        pageViewController.setViewControllers([MainViewController()], direction: .forward, animated: true)
+    }
+
+    func setConstraints(){
+        NSLayoutConstraint.activate([
+
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+
+            pageViewController.view.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 10),
+            pageViewController.view.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            pageViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            pageViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+        ])
+
+    }
 }
 
 
