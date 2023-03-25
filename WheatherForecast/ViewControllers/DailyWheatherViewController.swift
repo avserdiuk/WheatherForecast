@@ -75,12 +75,14 @@ class DailyWheatherViewController: UIViewController {
 
 extension DailyWheatherViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        4
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 || indexPath.row == 1  {
+        if indexPath.row == 0 || indexPath.row == 1 {
             return CustomDailyWheatherTableViewCell()
+        } else if indexPath.row == 2 {
+            return CustomDailyWheatherDayNightTableViewCell()
         } else {
             return CustomDailyWheatherAirQualityTableViewCell()
         }

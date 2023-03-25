@@ -73,7 +73,7 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
             wrapperView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 0),
 
             titleLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 15),
-            titleLabel.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 21),
+            titleLabel.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 15),
 
             wheatherImageView.widthAnchor.constraint(equalToConstant: 26),
 
