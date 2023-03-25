@@ -22,7 +22,6 @@ class CVLabel : UILabel {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.text = text
-        //self.font = UIFont.systemFont(ofSize: size, weight: weight)
         self.font = UIFont(name: "\(weight.rawValue)", size: size)
         self.textColor = color.color
         self.numberOfLines = numberOfLines
@@ -48,12 +47,12 @@ class CVImage : UIImageView {
 }
 
 class CVButton : UIButton {
-    init(title: String, titleSize: CGFloat, titleColor : Colors = .textBlack, titleWeight: UIFont.Weight = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
+    init(title: String, titleSize: CGFloat, titleColor : Colors = .textBlack, titleWeight: Font = .regular,  backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
         super.init(frame: .zero)
 
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(title, for: .normal)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: titleSize, weight: titleWeight)
+        self.titleLabel?.font = UIFont(name: "\(titleWeight.rawValue)", size: titleSize)
         self.setTitleColor(titleColor.color, for: .normal)
         self.backgroundColor = backgroundColor.color
         self.layer.cornerRadius = cornerRadius
@@ -91,4 +90,23 @@ class CVStackView : UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+class CVSwithcer : UIButton {
+
+    @objc func didTap(){
+        self.isSelected.toggle()
+    }
+
+    init(_ place : String){
+        super.init(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.setImage(UIImage(named: "\(place)_stateOFF"), for: .selected)
+        self.setImage(UIImage(named: "\(place)_stateON"), for: .normal)
+        addTarget(self, action: #selector(didTap), for: .touchUpInside)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

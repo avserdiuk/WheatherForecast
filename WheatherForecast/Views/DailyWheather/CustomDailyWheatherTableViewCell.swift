@@ -10,7 +10,7 @@ import UIKit
 class CustomDailyWheatherTableViewCell: UITableViewCell {
 
     private lazy var wrapperView = CVView(backgroundColor: .backgroundWhite, cornerRadius: 5)
-    private lazy var titleLabel = CVLabel(text: "День", size: 18, weight: .semibold)
+    private lazy var titleLabel = CVLabel(text: "День", size: 18, weight: .regular)
     private lazy var topStackView = CVStackView(axis: .horizontal, spacing: 10)
     private lazy var wheatherImageView = CVImage(imageName: "rain24h")
     private lazy var dergeeLable = CVLabel(text: "13°", size: 30, weight: .regular)

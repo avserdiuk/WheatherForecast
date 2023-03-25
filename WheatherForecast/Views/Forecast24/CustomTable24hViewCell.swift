@@ -14,7 +14,7 @@ class CustomTable24hViewCell: UITableViewCell {
     private lazy var mainStackView = CVStackView(axis: .vertical, spacing: 8)
     private lazy var dateLabel = CVLabel(text: "пт 16/04", size: 18, weight: .semibold)
     private lazy var timeLabel = CVLabel(text: "12:00", size: 14, weight: .regular, color: .textGray)
-    private lazy var degreeLabel = CVLabel(text: "13°", size: 18, weight: .bold)
+    private lazy var degreeLabel = CVLabel(text: "13°", size: 18, weight: .semibold)
 
     private lazy var add1StackView = CVStackView(axis: .vertical, spacing: 15)
     private lazy var moonImageView = CVImage(imageName: "forecast24_moon")

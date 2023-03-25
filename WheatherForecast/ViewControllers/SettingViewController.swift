@@ -14,7 +14,7 @@ class SettingViewController: UIViewController {
     private lazy var cloud3ImageView = CVImage(imageName: "cloud3")
 
     private lazy var wrapperView = CVView(backgroundColor: .backgroundWhite, cornerRadius: 10)
-    private lazy var settingTitle = CVLabel(text: settingsTitle, size: 18, weight: .bold, color: .textBlack)
+    private lazy var settingTitle = CVLabel(text: settingsTitle, size: 18, weight: .regular, color: .textBlack)
 
     private lazy var settingItemStack = CVStackView(axis: .vertical, spacing: 30)
     private lazy var settingItem1Label = CVLabel(text: settingsItem1, size: 16, weight: .regular, color: .textGray)
@@ -22,11 +22,17 @@ class SettingViewController: UIViewController {
     private lazy var settingItem3Label = CVLabel(text: settingsItem3, size: 16, weight: .regular, color: .textGray)
     private lazy var settingItem4Label = CVLabel(text: settingsItem4, size: 16, weight: .regular, color: .textGray)
 
+    private lazy var settingItemStack2 = CVStackView(axis: .vertical, spacing: 18)
+    private lazy var settingItem1Switcher = CVSwithcer("temp")
+    private lazy var settingItem2Switcher = CVSwithcer("wind")
+    private lazy var settingItem3Switcher = CVSwithcer("time")
+    private lazy var settingItem4Switcher = CVSwithcer("notif")
+
     private lazy var button = CVButton(
         title: settingsButtonLabel,
         titleSize: 16,
         titleColor: .textWhite,
-        titleWeight: .semibold,
+        titleWeight: .regular,
         backgroundColor: .orange,
         cornerRadius: 10)
 
@@ -46,10 +52,15 @@ class SettingViewController: UIViewController {
         view.addSubview(wrapperView)
         wrapperView.addSubview(settingTitle)
         wrapperView.addSubview(settingItemStack)
-        settingItemStack.addArrangedSubview(settingItem1Label)
-        settingItemStack.addArrangedSubview(settingItem2Label)
-        settingItemStack.addArrangedSubview(settingItem3Label)
-        settingItemStack.addArrangedSubview(settingItem4Label)
+            settingItemStack.addArrangedSubview(settingItem1Label)
+            settingItemStack.addArrangedSubview(settingItem2Label)
+            settingItemStack.addArrangedSubview(settingItem3Label)
+            settingItemStack.addArrangedSubview(settingItem4Label)
+        wrapperView.addSubview(settingItemStack2)
+            settingItemStack2.addArrangedSubview(settingItem1Switcher)
+            settingItemStack2.addArrangedSubview(settingItem2Switcher)
+            settingItemStack2.addArrangedSubview(settingItem3Switcher)
+            settingItemStack2.addArrangedSubview(settingItem4Switcher)
         view.addSubview(button)
     }
 
@@ -81,6 +92,9 @@ class SettingViewController: UIViewController {
 
             settingItemStack.topAnchor.constraint(equalTo: settingTitle.bottomAnchor, constant: 20),
             settingItemStack.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 20),
+
+            settingItemStack2.topAnchor.constraint(equalTo: settingTitle.bottomAnchor, constant: 20),
+            settingItemStack2.rightAnchor.constraint(equalTo: wrapperView.rightAnchor, constant: -30),
 
             button.topAnchor.constraint(equalTo: settingItemStack.bottomAnchor, constant: 40),
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),

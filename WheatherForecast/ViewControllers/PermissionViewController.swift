@@ -12,7 +12,7 @@ class PermissionViewController: UIViewController {
     private lazy var imageView = CVImage(imageName: "permissionImage")
 
     private lazy var titleLabel = CVLabel(
-        text: permissionTitle, size: 16, weight: .bold,
+        text: permissionTitle, size: 16, weight: .semibold,
         color: .textWhite,
         numberOfLines: 0,
         textAlignment: .center
@@ -36,7 +36,7 @@ class PermissionViewController: UIViewController {
         title: permissionAcceptButtonTitle,
         titleSize: 12,
         titleColor: .textWhite,
-        titleWeight: .bold,
+        titleWeight: .semibold,
         backgroundColor: .orange,
         cornerRadius: 10
     )

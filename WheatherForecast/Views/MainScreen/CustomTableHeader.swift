@@ -19,24 +19,24 @@ class CustomTableHeader: UITableViewHeaderFooterView {
     private lazy var stackView = CVStackView(axis: .vertical, spacing: 9, alignment: .center)
 
     private lazy var dayNightTempLabel = CVLabel(text: "7°/13°", size: 16, weight: .regular, color: .textWhite)
-    private lazy var nowTempLabel = CVLabel(text: "13°", size: 36, weight: .bold, color: .textWhite)
-    private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 16, weight: .semibold, color: .textWhite)
+    private lazy var nowTempLabel = CVLabel(text: "13°", size: 36, weight: .semibold, color: .textWhite)
+    private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 16, weight: .regular, color: .textWhite)
 
     private lazy var additionStackView = CVStackView(axis: .horizontal, spacing: 20)
 
     private lazy var sunView = CVView()
     private lazy var sunViewImageView = CVImage(imageName: "sun")
-    private lazy var sunViewLabel = CVLabel(text: "0", size: 14, weight: .semibold, color: .textWhite)
+    private lazy var sunViewLabel = CVLabel(text: "0", size: 14, weight: .regular, color: .textWhite)
 
     private lazy var windView = CVView()
     private lazy var windViewImageView = CVImage(imageName: "wind")
-    private lazy var windViewLabel = CVLabel(text: "3 м/с", size: 14, weight: .semibold, color: .textWhite)
+    private lazy var windViewLabel = CVLabel(text: "3 м/с", size: 14, weight: .regular, color: .textWhite)
 
     private lazy var rainView = CVView()
     private lazy var rainViewImageView = CVImage(imageName: "rain")
-    private lazy var rainViewLabel = CVLabel(text: "75 %", size: 14, weight: .semibold, color: .textWhite)
+    private lazy var rainViewLabel = CVLabel(text: "75 %", size: 14, weight: .regular, color: .textWhite)
 
-    private lazy var dataTimeLabel = CVLabel(text: "17:48,  пт 16 апреля", size: 16, weight: .semibold, color: .textGold)
+    private lazy var dataTimeLabel = CVLabel(text: "17:48,  пт 16 апреля", size: 16, weight: .regular, color: .textGold)
 
     private lazy var more24hButton = CVButton(
         title: mainTableHeaderAdditionTitle,
