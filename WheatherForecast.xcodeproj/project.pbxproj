@@ -16,6 +16,10 @@
 		414B535D29CDD60100266E69 /* CustomDailyWheatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B535C29CDD60100266E69 /* CustomDailyWheatherTableViewCell.swift */; };
 		414B535F29CE223700266E69 /* CustomDailyWheatherDayNightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B535E29CE223700266E69 /* CustomDailyWheatherDayNightTableViewCell.swift */; };
 		414B536129CE242600266E69 /* CustomDailyWheatherAirQualityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B536029CE242600266E69 /* CustomDailyWheatherAirQualityTableViewCell.swift */; };
+		414B536A29CEFD5A00266E69 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B536929CEFD5A00266E69 /* Fonts.swift */; };
+		414B536E29CEFFC300266E69 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */; };
+		414B536F29CEFFC300266E69 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536C29CEFFC300266E69 /* Rubik-Bold.ttf */; };
+		414B537029CEFFC300266E69 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */; };
 		4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256529C8503200CCE6D4 /* AppDelegate.swift */; };
 		4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256729C8503200CCE6D4 /* SceneDelegate.swift */; };
 		4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256929C8503200CCE6D4 /* SettingViewController.swift */; };
@@ -42,6 +46,10 @@
 		414B535C29CDD60100266E69 /* CustomDailyWheatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDailyWheatherTableViewCell.swift; sourceTree = "<group>"; };
 		414B535E29CE223700266E69 /* CustomDailyWheatherDayNightTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDailyWheatherDayNightTableViewCell.swift; sourceTree = "<group>"; };
 		414B536029CE242600266E69 /* CustomDailyWheatherAirQualityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDailyWheatherAirQualityTableViewCell.swift; sourceTree = "<group>"; };
+		414B536929CEFD5A00266E69 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
+		414B536C29CEFFC300266E69 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		4171256229C8503200CCE6D4 /* WheatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4171256529C8503200CCE6D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4171256729C8503200CCE6D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +111,16 @@
 			path = DailyWheather;
 			sourceTree = "<group>";
 		};
+		414B536229CEFB8B00266E69 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				414B536C29CEFFC300266E69 /* Rubik-Bold.ttf */,
+				414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */,
+				414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		4171255929C8503200CCE6D4 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +144,7 @@
 				4171257929C8623500CCE6D4 /* ViewControllers */,
 				4171258129C868A600CCE6D4 /* Models */,
 				4107EF7C29C8DB42009C24C1 /* Views */,
+				414B536229CEFB8B00266E69 /* Fonts */,
 				4171256E29C8503200CCE6D4 /* Assets.xcassets */,
 				4171257329C8503200CCE6D4 /* Info.plist */,
 			);
@@ -159,6 +178,7 @@
 			children = (
 				4171257F29C8639000CCE6D4 /* Colors.swift */,
 				4171258229C868BC00CCE6D4 /* Texts.swift */,
+				414B536929CEFD5A00266E69 /* Fonts.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,6 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4171256F29C8503200CCE6D4 /* Assets.xcassets in Resources */,
+				414B537029CEFFC300266E69 /* Rubik-Regular.ttf in Resources */,
+				414B536F29CEFFC300266E69 /* Rubik-Bold.ttf in Resources */,
+				414B536E29CEFFC300266E69 /* Rubik-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +276,7 @@
 				4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */,
 				4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */,
 				414B536129CE242600266E69 /* CustomDailyWheatherAirQualityTableViewCell.swift in Sources */,
+				414B536A29CEFD5A00266E69 /* Fonts.swift in Sources */,
 				414B535F29CE223700266E69 /* CustomDailyWheatherDayNightTableViewCell.swift in Sources */,
 				41D9556429C9FF530000CFAB /* CustomTableViewCell.swift in Sources */,
 				4107EF7B29C8D87A009C24C1 /* CustomUIViews.swift in Sources */,

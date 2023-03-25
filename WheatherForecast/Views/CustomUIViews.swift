@@ -13,7 +13,7 @@ class CVLabel : UILabel {
     init(
         text: String,
         size : CGFloat,
-        weight: UIFont.Weight,
+        weight: Font,
         color: Colors = .textBlack,
         numberOfLines: Int = 1,
         textAlignment: NSTextAlignment = .left,
@@ -22,7 +22,8 @@ class CVLabel : UILabel {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.text = text
-        self.font = UIFont.systemFont(ofSize: size, weight: weight)
+        //self.font = UIFont.systemFont(ofSize: size, weight: weight)
+        self.font = UIFont(name: "\(weight.rawValue)", size: size)
         self.textColor = color.color
         self.numberOfLines = numberOfLines
         self.textAlignment = textAlignment
