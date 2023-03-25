@@ -17,6 +17,7 @@ enum Colors {
     case accentBlue
     case backgroundWhite
     case borderBlue
+    case backgroundGreen
     case transparent
 
     var color: UIColor {
@@ -38,6 +39,8 @@ enum Colors {
                 return UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1)
             case .borderBlue:
                 return UIColor(red: 0.671, green: 0.737, blue: 0.918, alpha: 1)
+            case .backgroundGreen:
+                return UIColor(red: 0.507, green: 0.792, blue: 0.501, alpha: 1)
             case .transparent:
                 return UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }

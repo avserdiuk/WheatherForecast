@@ -15,7 +15,7 @@ class CustomTableViewCell: UITableViewCell {
     private lazy var rainLabel = CVLabel(text: "75%", size: 12, weight: .regular, color: .accentBlue)
     private lazy var titleLabel = CVLabel(text: "Местами дождь", size: 16, weight: .regular, color: .textBlack)
     private lazy var degreeLabel = CVLabel(text: "4°-11°", size: 18, weight: .regular, color: .textBlack)
-    private lazy var arrorImage = CVImage(imageName: "rigthArror")
+    private lazy var arrorImage = CVImage(imageName: "rightArrow")
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

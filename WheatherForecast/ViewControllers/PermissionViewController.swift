@@ -12,7 +12,7 @@ class PermissionViewController: UIViewController {
     private lazy var imageView = CVImage(imageName: "permissionImage")
 
     private lazy var titleLabel = CVLabel(
-        text: permissionTitle, size: 16, weight: .bold,
+        text: permissionTitle, size: 16, weight: .semibold,
         color: .textWhite,
         numberOfLines: 0,
         textAlignment: .center
@@ -36,7 +36,7 @@ class PermissionViewController: UIViewController {
         title: permissionAcceptButtonTitle,
         titleSize: 12,
         titleColor: .textWhite,
-        titleWeight: .bold,
+        titleWeight: .semibold,
         backgroundColor: .orange,
         cornerRadius: 10
     )
@@ -63,6 +63,14 @@ class PermissionViewController: UIViewController {
         view.addSubview(subtitle2Label)
         view.addSubview(acceptButton)
         view.addSubview(declineButton)
+
+        acceptButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+    }
+
+    @objc func didTapButton(){
+        let controller = Forecast24ViewController()
+
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     func setConstraints(){
