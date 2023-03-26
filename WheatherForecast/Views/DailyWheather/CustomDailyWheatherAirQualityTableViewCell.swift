@@ -19,19 +19,31 @@ class CustomDailyWheatherAirQualityTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setViews()
+        setConstraints()
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setViews() {
         addSubview(wrapperView)
         wrapperView.addSubview(titleLabel)
         wrapperView.addSubview(indexLabel)
         wrapperView.addSubview(qualityView)
-            qualityView.addSubview(qualityLabel)
+        qualityView.addSubview(qualityLabel)
         wrapperView.addSubview(descripntionLabel)
+    }
 
+    func setConstraints(){
         NSLayoutConstraint.activate([
             wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             wrapperView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             wrapperView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             wrapperView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 0),
-
+            
             titleLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 15),
             titleLabel.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 15),
 
@@ -53,9 +65,4 @@ class CustomDailyWheatherAirQualityTableViewCell: UITableViewCell {
 
         ])
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

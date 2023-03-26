@@ -40,6 +40,16 @@ class CustomTable24hViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = Colors.backgroundWhite.color
 
+        setViews()
+        setConstraints()
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(mainStackView)
             mainStackView.addArrangedSubview(dateLabel)
@@ -61,7 +71,9 @@ class CustomTable24hViewCell: UITableViewCell {
             add3StackView.addArrangedSubview(add33Label)
             add3StackView.addArrangedSubview(add44Label)
         wrapperView.addSubview(hrView)
+    }
 
+    func setConstraints(){
         NSLayoutConstraint.activate([
 
             wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
@@ -75,7 +87,7 @@ class CustomTable24hViewCell: UITableViewCell {
 
             dateLabel.heightAnchor.constraint(equalToConstant: 22),
             timeLabel.heightAnchor.constraint(equalToConstant: 19),
-            
+
             add1StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 33),
             add1StackView.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 88),
 
@@ -92,9 +104,4 @@ class CustomTable24hViewCell: UITableViewCell {
 
         ])
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

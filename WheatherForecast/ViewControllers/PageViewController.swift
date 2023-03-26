@@ -63,7 +63,6 @@ class PageViewController: UIViewController {
 
     func setConstraints(){
         NSLayoutConstraint.activate([
-
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
 
@@ -72,14 +71,13 @@ class PageViewController: UIViewController {
             pageViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             pageViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
         ])
-
     }
 
     @objc func showMenu(){
         let controller = SettingViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
-
+    
     @objc func showGeo(){
         let controller = PermissionViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -87,14 +85,13 @@ class PageViewController: UIViewController {
 
 }
 
-
 extension PageViewController : UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-            nil // MainViewController()
-        }
+        nil // MainViewController()
+    }
 
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-            nil // MainViewController()
-        }
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        nil // MainViewController()
+    }
 
 }

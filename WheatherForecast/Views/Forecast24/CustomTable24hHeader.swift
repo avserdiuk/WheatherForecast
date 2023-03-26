@@ -13,8 +13,15 @@ class CustomTable24hHeader: UITableViewHeaderFooterView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        addSubview(image)
 
+        addSubview(image)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setConstraints(){
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             image.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
@@ -23,10 +30,4 @@ class CustomTable24hHeader: UITableViewHeaderFooterView {
 
         ])
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-
 }

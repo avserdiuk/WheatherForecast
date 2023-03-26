@@ -17,7 +17,6 @@ class MainViewController: UIViewController {
         table.dataSource = self
         table.delegate = self
         table.backgroundColor = .white
-        //table.allowsSelection = false
         table.showsVerticalScrollIndicator = false
         table.separatorColor = .clear
         return table
@@ -28,17 +27,18 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
 
         view.addSubview(tableView)
+        setConstraints()
 
+    }
+
+    func setConstraints(){
         NSLayoutConstraint.activate([
-
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
-
     }
-
 }
 
 extension MainViewController : UITableViewDataSource {
@@ -47,8 +47,8 @@ extension MainViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard section == 1 else { return 0}
-        return 10
+        guard section == 1 else { return 0 }
+        return 7
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,8 +56,6 @@ extension MainViewController : UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-
-
 }
 
 extension MainViewController : UITableViewDelegate {
@@ -66,7 +64,6 @@ extension MainViewController : UITableViewDelegate {
             let cell = CustomTableHeader()
             cell.viewController = self.viewController
             return cell
-
         }
         return CustomSectionHeader()
     }

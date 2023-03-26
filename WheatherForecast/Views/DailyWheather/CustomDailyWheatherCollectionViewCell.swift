@@ -12,19 +12,15 @@ class CustomDailyWheatherCollectionViewCell: UICollectionViewCell {
     private lazy var view = CVView(backgroundColor: .accentBlue)
     private lazy var titleLabel = CVLabel(text: "16/04 ПТ", size: 18, weight: .regular, color: .textBlack, tag: 1)
 
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
-
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-
         ])
-
     }
 
     override func prepareForReuse() {

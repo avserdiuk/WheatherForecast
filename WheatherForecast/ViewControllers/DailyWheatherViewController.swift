@@ -35,13 +35,23 @@ class DailyWheatherViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        setViews()
+        setConstraints()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+
+    func setViews(){
         view.addSubview(backButton)
         view.addSubview(backButtonTitleLabel)
         view.addSubview(titleLabel)
         view.addSubview(tableView)
+    }
 
-
-
+    func setConstraints(){
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
@@ -56,22 +66,13 @@ class DailyWheatherViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-
         ])
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.isNavigationBarHidden = true
-    }
-
 
     @objc func didTapBackButton(){
         navigationController?.isNavigationBarHidden = false
         navigationController?.popViewController(animated: true)
     }
-
 }
 
 extension DailyWheatherViewController : UITableViewDataSource {
@@ -87,7 +88,6 @@ extension DailyWheatherViewController : UITableViewDataSource {
         } else {
             return CustomDailyWheatherAirQualityTableViewCell()
         }
-
     }
 }
 

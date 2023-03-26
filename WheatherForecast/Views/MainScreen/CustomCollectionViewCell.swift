@@ -24,7 +24,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
         setViews()
         setConstraints()
-
     }
 
     required init?(coder: NSCoder) {
@@ -36,7 +35,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
         stackView.addArrangedSubview(timeLabel)
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(degreeLabel)
-
     }
 
     func setConstraints(){

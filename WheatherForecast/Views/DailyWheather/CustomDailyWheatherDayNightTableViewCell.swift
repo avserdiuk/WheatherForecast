@@ -41,28 +41,39 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setViews()
+        setConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(titleLabel)
         wrapperView.addSubview(leftView)
         leftView.addSubview(leftStackView1)
         leftView.addSubview(leftImageView)
-            leftStackView1.addArrangedSubview(leftItem01Label)
-            leftStackView1.addArrangedSubview(leftItem02Label)
+        leftStackView1.addArrangedSubview(leftItem01Label)
+        leftStackView1.addArrangedSubview(leftItem02Label)
         leftView.addSubview(leftStackView2)
-            leftStackView2.addArrangedSubview(leftItem10Label)
-            leftStackView2.addArrangedSubview(leftItem11Label)
-            leftStackView2.addArrangedSubview(leftItem12Label)
+        leftStackView2.addArrangedSubview(leftItem10Label)
+        leftStackView2.addArrangedSubview(leftItem11Label)
+        leftStackView2.addArrangedSubview(leftItem12Label)
         rightView.addSubview(rightStackView1)
         rightView.addSubview(rightImageView)
-            rightStackView1.addArrangedSubview(rightItem01Label)
-            rightStackView1.addArrangedSubview(rightItem02Label)
+        rightStackView1.addArrangedSubview(rightItem01Label)
+        rightStackView1.addArrangedSubview(rightItem02Label)
         rightView.addSubview(rightStackView2)
-            rightStackView2.addArrangedSubview(rightItem10Label)
-            rightStackView2.addArrangedSubview(rightItem11Label)
-            rightStackView2.addArrangedSubview(rightItem12Label)
+        rightStackView2.addArrangedSubview(rightItem10Label)
+        rightStackView2.addArrangedSubview(rightItem11Label)
+        rightStackView2.addArrangedSubview(rightItem12Label)
         wrapperView.addSubview(vr)
         wrapperView.addSubview(rightView)
+    }
 
+    func setConstraints(){
         NSLayoutConstraint.activate([
             wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             wrapperView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
@@ -107,9 +118,4 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
             rightView.heightAnchor.constraint(equalToConstant: 97),
         ])
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

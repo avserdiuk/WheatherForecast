@@ -71,7 +71,6 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         setConstraints()
 
         more24hButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-
     }
 
     required init?(coder: NSCoder) {
@@ -187,7 +186,6 @@ class CustomTableHeader: UITableViewHeaderFooterView {
             more24hCollectionView.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 0),
             more24hCollectionView.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: 0),
             more24hCollectionView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -24)
-
         ])
     }
 }
@@ -201,7 +199,6 @@ extension CustomTableHeader : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath)
         return cell
     }
-
 }
 
 extension CustomTableHeader : UICollectionViewDelegateFlowLayout {
