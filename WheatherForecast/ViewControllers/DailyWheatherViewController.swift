@@ -17,7 +17,7 @@ class DailyWheatherViewController: UIViewController {
         return button
     }()
 
-    private lazy var backButtonTitleLabel = CVButton(title: "Дневная погода", titleSize: 16, titleColor: .textGray)
+    private lazy var backButtonTitleLabel = CVButton(title: dailyWheatherBackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
     private lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
 
     private lazy var tableView : UITableView = {

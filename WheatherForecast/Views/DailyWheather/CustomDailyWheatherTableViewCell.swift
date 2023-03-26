@@ -10,7 +10,7 @@ import UIKit
 class CustomDailyWheatherTableViewCell: UITableViewCell {
 
     private lazy var wrapperView = CVView(backgroundColor: .backgroundWhite, cornerRadius: 5)
-    private lazy var titleLabel = CVLabel(text: "День", size: 18, weight: .regular)
+    private lazy var titleLabel = CVLabel(text: dailyWheatherTitleLabel, size: 18, weight: .regular)
     private lazy var topStackView = CVStackView(axis: .horizontal, spacing: 10)
     private lazy var wheatherImageView = CVImage(imageName: "rain24h")
     private lazy var dergeeLable = CVLabel(text: "13°", size: 30, weight: .regular)
@@ -24,11 +24,11 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
     private lazy var row5IcoImageView = CVImage(imageName: "dailyIcoCloud")
 
     private lazy var label1StackView = CVStackView(axis: .vertical, spacing: 22.5)
-    private lazy var row01Label = CVLabel(text: "По ощущениям", size: 14, weight: .regular)
-    private lazy var row02Label = CVLabel(text: "Ветер", size: 14, weight: .regular)
-    private lazy var row03Label = CVLabel(text: "УФ индекс", size: 14, weight: .regular)
-    private lazy var row04Label = CVLabel(text: "Дождь", size: 14, weight: .regular)
-    private lazy var row05Label = CVLabel(text: "Облачность", size: 14, weight: .regular)
+    private lazy var row01Label = CVLabel(text: dailyWheatherRow01Label, size: 14, weight: .regular)
+    private lazy var row02Label = CVLabel(text: dailyWheatherRow02Label, size: 14, weight: .regular)
+    private lazy var row03Label = CVLabel(text: dailyWheatherRow03Label, size: 14, weight: .regular)
+    private lazy var row04Label = CVLabel(text: dailyWheatherRow04Label, size: 14, weight: .regular)
+    private lazy var row05Label = CVLabel(text: dailyWheatherRow05Label, size: 14, weight: .regular)
 
     private lazy var label2StackView = CVStackView(axis: .vertical, spacing: 17.5, alignment: .trailing)
     private lazy var row11Label = CVLabel(text: "11°", size: 18, weight: .regular)

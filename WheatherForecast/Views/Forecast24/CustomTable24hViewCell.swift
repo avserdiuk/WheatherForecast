@@ -23,10 +23,10 @@ class CustomTable24hViewCell: UITableViewCell {
     private lazy var cloudImageView = CVImage(imageName: "forecast24_cloud")
 
     private lazy var add2StackView = CVStackView(axis: .vertical, spacing: 9)
-    private lazy var add1Label = CVLabel(text: "Преимущественно", size: 14, weight: .regular)
-    private lazy var add2Label = CVLabel(text: "Ветер", size: 14, weight: .regular)
-    private lazy var add3Label = CVLabel(text: "Атмосферные осадки", size: 14, weight: .regular)
-    private lazy var add4Label = CVLabel(text: "Облачность", size: 14, weight: .regular)
+    private lazy var add1Label = CVLabel(text: forecast24Add1Label, size: 14, weight: .regular)
+    private lazy var add2Label = CVLabel(text: forecast24Add2Label, size: 14, weight: .regular)
+    private lazy var add3Label = CVLabel(text: forecast24Add3Label, size: 14, weight: .regular)
+    private lazy var add4Label = CVLabel(text: forecast24Add4Label, size: 14, weight: .regular)
 
     private lazy var add3StackView = CVStackView(axis: .vertical, spacing: 9, alignment: .trailing)
     private lazy var add11Label = CVLabel(text: "10", size: 14, weight: .regular, color: .textGray)

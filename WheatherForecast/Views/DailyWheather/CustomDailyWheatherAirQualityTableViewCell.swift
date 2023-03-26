@@ -10,11 +10,11 @@ import UIKit
 class CustomDailyWheatherAirQualityTableViewCell: UITableViewCell {
 
     private lazy var wrapperView = CVView(backgroundColor: .transparent, cornerRadius: 5)
-    private lazy var titleLabel = CVLabel(text: "Качество воздуха", size: 18, weight: .regular)
+    private lazy var titleLabel = CVLabel(text: dailyWheatherAirQualityTitleLabel, size: 18, weight: .regular)
     private lazy var indexLabel = CVLabel(text: "42", size: 30, weight: .regular)
     private lazy var qualityView = CVView(backgroundColor: .backgroundGreen, cornerRadius: 5)
-    private lazy var qualityLabel = CVLabel(text: "хорошо", size: 18, weight: .regular, color: .textWhite)
-    private lazy var descripntionLabel = CVLabel(text: "Качество воздуха считается удовлетворительным и загрязнения воздуха представляются незначительными в пределах нормы", size: 15, weight: .regular, color: .textGray, numberOfLines: 0)
+    private lazy var qualityLabel = CVLabel(text: dailyWheatherAirQualityQualityLabel, size: 18, weight: .regular, color: .textWhite)
+    private lazy var descripntionLabel = CVLabel(text: dailyWheatherAirQualityDescripntionLabel, size: 15, weight: .regular, color: .textGray, numberOfLines: 0)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

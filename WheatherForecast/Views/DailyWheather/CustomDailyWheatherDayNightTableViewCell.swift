@@ -10,7 +10,7 @@ import UIKit
 class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
 
     private lazy var wrapperView = CVView()
-    private lazy var titleLabel = CVLabel(text: "Солнце и луна", size: 18, weight: .regular)
+    private lazy var titleLabel = CVLabel(text: dailyWheatherSunMoonTitleLabel, size: 18, weight: .regular)
 
     private lazy var leftView = CVView()
     private lazy var rightView = CVView()
@@ -18,8 +18,8 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
 
     private lazy var leftStackView1 = CVStackView(axis: .vertical, spacing: 17)
     private lazy var leftImageView = CVImage(imageName: "sunSM")
-    private lazy var leftItem01Label = CVLabel(text: "Восход", size: 14, weight: .regular, color: .textGray)
-    private lazy var leftItem02Label = CVLabel(text: "Заход", size: 14, weight: .regular, color: .textGray)
+    private lazy var leftItem01Label = CVLabel(text: dailyWheatherSunMoonLeftItem01Label, size: 14, weight: .regular, color: .textGray)
+    private lazy var leftItem02Label = CVLabel(text: dailyWheatherSunMoonLeftItem02Label, size: 14, weight: .regular, color: .textGray)
 
     private lazy var leftStackView2 = CVStackView(axis: .vertical, spacing: 17, alignment: .trailing)
     private lazy var leftItem10Label = CVLabel(text: "14 ч 26 м", size: 16, weight: .regular)
@@ -29,8 +29,8 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
 
     private lazy var rightStackView1 = CVStackView(axis: .vertical, spacing: 17)
     private lazy var rightImageView = CVImage(imageName: "moonSM")
-    private lazy var rightItem01Label = CVLabel(text: "Восход", size: 14, weight: .regular, color: .textGray)
-    private lazy var rightItem02Label = CVLabel(text: "Заход", size: 14, weight: .regular, color: .textGray)
+    private lazy var rightItem01Label = CVLabel(text: dailyWheatherSunMoonLeftItem01Label, size: 14, weight: .regular, color: .textGray)
+    private lazy var rightItem02Label = CVLabel(text: dailyWheatherSunMoonLeftItem02Label, size: 14, weight: .regular, color: .textGray)
 
     private lazy var rightStackView2 = CVStackView(axis: .vertical, spacing: 17, alignment: .trailing)
     private lazy var rightItem10Label = CVLabel(text: "14 ч 26 м", size: 16, weight: .regular)
