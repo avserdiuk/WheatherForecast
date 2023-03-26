@@ -9,13 +9,15 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    weak var viewController : UIViewController?
+
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
         table.backgroundColor = .white
-        table.allowsSelection = false
+        //table.allowsSelection = false
         table.showsVerticalScrollIndicator = false
         table.separatorColor = .clear
         return table
@@ -50,7 +52,9 @@ extension MainViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return CustomTableViewCell()
+        let cell = CustomTableViewCell()
+        cell.selectionStyle = .none
+        return cell
     }
 
 
@@ -58,8 +62,16 @@ extension MainViewController : UITableViewDataSource {
 
 extension MainViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 1 else { return CustomTableHeader()}
+        guard section == 1 else {
+            let cell = CustomTableHeader()
+            cell.viewController = self.viewController
+            return cell
+
+        }
         return CustomSectionHeader()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewController?.navigationController?.pushViewController(DailyWheatherViewController(), animated: true)
+    }
 }

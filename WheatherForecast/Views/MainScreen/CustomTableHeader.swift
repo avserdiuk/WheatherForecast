@@ -9,6 +9,8 @@ import UIKit
 
 class CustomTableHeader: UITableViewHeaderFooterView {
 
+    weak var viewController : UIViewController?
+
     private lazy var wrapper = CVView()
 
     private lazy var view = CVView(backgroundColor: .accentBlue)
@@ -68,10 +70,18 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         setViews()
         setConstraints()
 
+        more24hButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc func didTap(){
+        let controller = Forecast24ViewController()
+        controller.viewController = viewController
+        viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 
     func setViews(){

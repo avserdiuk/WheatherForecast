@@ -35,12 +35,16 @@ class PageViewController: UIViewController {
         setConstraints()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
     func setNavigationBar(){
         title = "Омск, Россия"
 
-        let menu = UIBarButtonItem(image: UIImage(named: "menu"), style: .done, target: self, action: nil)
-        let point = UIBarButtonItem(image: UIImage(named: "point"), style: .done, target: self, action: nil)
-
+        let menu = UIBarButtonItem(image: UIImage(named: "menu"), style: .done, target: self, action: #selector(showMenu))
+        let point = UIBarButtonItem(image: UIImage(named: "point"), style: .done, target: self, action: #selector(showGeo))
         navigationItem.leftBarButtonItems = [menu]
         navigationItem.rightBarButtonItems = [point]
         navigationController?.navigationBar.tintColor = .black
@@ -50,7 +54,11 @@ class PageViewController: UIViewController {
     func setViews(){
         view.addSubview(pageControl)
         view.addSubview(pageViewController.view)
-        pageViewController.setViewControllers([MainViewController()], direction: .forward, animated: true)
+
+        let controller = MainViewController()
+        controller.viewController = self
+
+        pageViewController.setViewControllers([controller], direction: .forward, animated: true)
     }
 
     func setConstraints(){
@@ -66,16 +74,27 @@ class PageViewController: UIViewController {
         ])
 
     }
+
+    @objc func showMenu(){
+        let controller = SettingViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
+    @objc func showGeo(){
+        let controller = PermissionViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
 }
 
 
 extension PageViewController : UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-            MainViewController()
+            nil // MainViewController()
         }
 
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-            MainViewController()
+            nil // MainViewController()
         }
 
 }

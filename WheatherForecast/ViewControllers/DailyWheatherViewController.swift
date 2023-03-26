@@ -68,6 +68,7 @@ class DailyWheatherViewController: UIViewController {
 
 
     @objc func didTapBackButton(){
+        navigationController?.isNavigationBarHidden = false
         navigationController?.popViewController(animated: true)
     }
 

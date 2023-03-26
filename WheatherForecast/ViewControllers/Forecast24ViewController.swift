@@ -9,6 +9,8 @@ import UIKit
 
 class Forecast24ViewController: UIViewController {
 
+    weak var viewController : UIViewController?
+
     private lazy var backButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -61,13 +63,13 @@ class Forecast24ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         navigationController?.isNavigationBarHidden = true
     }
 
 
     @objc func didTapBackButton(){
-        navigationController?.popViewController(animated: true)
+        navigationController?.isNavigationBarHidden = false
+        viewController?.navigationController?.popViewController(animated: true)
     }
 
 }

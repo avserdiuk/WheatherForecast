@@ -34,7 +34,8 @@ class SettingViewController: UIViewController {
         titleColor: .textWhite,
         titleWeight: .regular,
         backgroundColor: .orange,
-        cornerRadius: 10)
+        cornerRadius: 10
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,18 @@ class SettingViewController: UIViewController {
         setViews()
         setConstraints()
 
+        button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.isHidden = true
+    }
+
+    @objc func didTap(){
+        navigationController?.popViewController(animated: true)
     }
 
     func setViews(){
