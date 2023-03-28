@@ -69,3 +69,4 @@ struct Hours : Codable {
     let hour : String
     let condition : String
 }
+

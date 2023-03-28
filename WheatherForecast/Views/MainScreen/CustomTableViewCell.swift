@@ -13,7 +13,7 @@ class CustomTableViewCell: UITableViewCell {
     private lazy var dateLabel = CVLabel(text: "23/04", size: 16, weight: .regular, color: .textGray)
     private lazy var rainImage = CVImage(imageName: "rain24h")
     private lazy var rainLabel = CVLabel(text: "75%", size: 12, weight: .regular, color: .accentBlue)
-    private lazy var titleLabel = CVLabel(text: "Местами дождь", size: 16, weight: .regular, color: .textBlack)
+    private lazy var titleLabel = CVLabel(text: "Местами дождь", size: 16, weight: .regular, color: .textBlack, textAlignment: .center)
     private lazy var degreeLabel = CVLabel(text: "4°-11°", size: 18, weight: .regular, color: .textBlack, textAlignment: .right)
     private lazy var arrorImage = CVImage(imageName: "rightArrow")
 
@@ -40,8 +40,8 @@ class CustomTableViewCell: UITableViewCell {
 
     func setup(_ wheather: Wheather, _ indexPath : IndexPath){
         dateLabel.text = getTime(unixtime: wheather.forecasts[indexPath.row].unixtime)
-        titleLabel.text = wheather.forecasts[indexPath.row].parts.day.condition
-        degreeLabel.text = "\(wheather.forecasts[indexPath.row].parts.night.tempMin)°.. \(wheather.forecasts[indexPath.row].parts.day.tempMax)°"
+        titleLabel.text = getCondition(wheather.forecasts[indexPath.row].parts.day.condition)
+        degreeLabel.text = "\(wheather.forecasts[indexPath.row].parts.night.tempMin)°/\(wheather.forecasts[indexPath.row].parts.day.tempMax)°"
         rainLabel.text =  "\(wheather.forecasts[indexPath.row].parts.day.precipitation*100)%"
         rainImage.image = UIImage(named: "\(wheather.forecasts[indexPath.row].parts.day.condition)")
     }
@@ -87,7 +87,7 @@ class CustomTableViewCell: UITableViewCell {
 
             titleLabel.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor),
             titleLabel.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 66),
-            titleLabel.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: -110),
+            titleLabel.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: -100),
 
             degreeLabel.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor),
             degreeLabel.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 3),

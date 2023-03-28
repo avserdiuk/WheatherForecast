@@ -182,12 +182,12 @@
 		4171258129C868A600CCE6D4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				414B537529D3328300266E69 /* Wheather.swift */,
+				414B537129D1CF9E00266E69 /* NetworkManager.swift */,
 				4171257F29C8639000CCE6D4 /* Colors.swift */,
 				4171258229C868BC00CCE6D4 /* Texts.swift */,
 				414B536929CEFD5A00266E69 /* Fonts.swift */,
-				414B537129D1CF9E00266E69 /* NetworkManager.swift */,
 				414B537329D1DEE100266E69 /* Struct template.swift */,
-				414B537529D3328300266E69 /* Wheather.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

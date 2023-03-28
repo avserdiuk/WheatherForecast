@@ -33,7 +33,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     func setup(_ wheater: Wheather, _ indexPath: IndexPath) {
         timeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].hour):00"
         imageView.image = UIImage(named: "\(wheater.forecasts[0].hours[indexPath.row].condition)")
-        degreeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].temp)"
+        degreeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].temp)°"
     }
 
     func setViews(){

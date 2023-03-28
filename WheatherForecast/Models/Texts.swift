@@ -45,3 +45,48 @@ let dailyWheatherSunMoonLeftItem02Label = "Заход"
 let dailyWheatherAirQualityTitleLabel = "Качество воздуха"
 let dailyWheatherAirQualityQualityLabel = "хорошо"
 let dailyWheatherAirQualityDescripntionLabel = "Качество воздуха считается удовлетворительным и загрязнения воздуха представляются незначительными в пределах нормы"
+
+func getCondition(_ condition: String) -> String {
+    switch condition {
+    case "clear":
+        return "Ясное небо"
+    case "partly-cloudy":
+        return "Малооблачно"
+    case "cloudy":
+        return "Местами облачно"
+    case "overcast":
+        return "Пасмурно"
+    case "drizzle":
+        return "Моросящий дождь"
+    case "light-rain":
+        return "Небольшой дождь"
+    case "rain":
+        return "Дождь"
+    case "moderate-rain":
+        return "Умеренный дождь"
+    case "heavy-rain":
+        return "Сильный дождь"
+    case "continuous-heavy-rain":
+        return "Длительный дождь"
+    case "showers":
+        return "Ливень"
+    case "wet-snow":
+        return "Дождь со снегом"
+    case "light-snow":
+        return "Небольшой снег"
+    case "snow":
+        return "Снег"
+    case "snow-showers":
+        return "Снегопад"
+    case "hail":
+        return "Град"
+    case "thunderstorm":
+        return "Гроза"
+    case "thunderstorm-with-rain":
+        return "Дождь с грозой"
+    case "thunderstorm-with-hail":
+        return "Гроза с градом"
+    default:
+        return "------"
+    }
+}

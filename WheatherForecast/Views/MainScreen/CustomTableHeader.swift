@@ -23,7 +23,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
     private lazy var dayNightTempLabel = CVLabel(text: "7°/13°", size: 16, weight: .regular, color: .textWhite)
     private lazy var nowTempLabel = CVLabel(text: "13°", size: 36, weight: .semibold, color: .textWhite)
-    private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 16, weight: .regular, color: .textWhite)
+    private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 18, weight: .regular, color: .textWhite)
 
     private lazy var additionStackView = CVStackView(axis: .horizontal, spacing: 20)
 
@@ -73,6 +73,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         setConstraints()
 
         more24hButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+
     }
 
     required init?(coder: NSCoder) {
@@ -83,12 +84,13 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         self.sunRiseLabel.text = "\(wheather.forecasts[0].sunrise)"
         self.sunSetLabel.text = "\(wheather.forecasts[0].sunset)"
         self.nowTempLabel.text = "\(wheather.fact.temp)°"
-        self.nowDescLabel.text = "\(wheather.fact.condition)"
+        self.nowDescLabel.text = getCondition(wheather.fact.condition)
         self.sunViewLabel.text = "\(Int(wheather.fact.cloudness*100))%"
         self.windViewLabel.text = "\(wheather.fact.windSpeed) м/с"
         self.rainViewLabel.text = "\(Int(wheather.fact.humidity))%"
         self.dataTimeLabel.text = "\(self.getCurrentTime())"
         self.dayNightTempLabel.text = "\(wheather.forecasts[0].parts.night.tempMin)°/\(wheather.forecasts[0].parts.day.tempMax)°"
+
     }
 
     @objc func didTap(){
