@@ -24,6 +24,7 @@ class CustomDailyWheatherCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         titleLabel.tag = 0
     }
 

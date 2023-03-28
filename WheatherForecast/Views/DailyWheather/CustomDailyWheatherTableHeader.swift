@@ -52,7 +52,7 @@ class CustomDailyWheatherTableHeader: UITableViewHeaderFooterView {
 
 extension CustomDailyWheatherTableHeader : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,7 +63,6 @@ extension CustomDailyWheatherTableHeader : UICollectionViewDataSource {
             cell.layer.cornerRadius = 5
             let label = cell.viewWithTag(1) as? UILabel
             label?.textColor = UIColor.white
-            
             return cell
         }
         

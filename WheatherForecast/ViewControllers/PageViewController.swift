@@ -9,9 +9,13 @@ import UIKit
 
 class PageViewController: UIViewController {
 
+    var number : Int = 3
+    var currentNumber : Int = 1
+
     private lazy var pageViewController : UIPageViewController = {
         let controller = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         controller.dataSource = self
+        controller.delegate = self
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         return controller
     }()
@@ -33,6 +37,19 @@ class PageViewController: UIViewController {
         setNavigationBar()
         setViews()
         setConstraints()
+
+        NetworkManager().getWheater { wheather in
+            DispatchQueue.main.async {
+
+                //print(wheather)
+
+                let controller = MainViewController()
+                controller.viewController = self
+                controller.wheather = wheather
+                
+                self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,11 +71,6 @@ class PageViewController: UIViewController {
     func setViews(){
         view.addSubview(pageControl)
         view.addSubview(pageViewController.view)
-
-        let controller = MainViewController()
-        controller.viewController = self
-
-        pageViewController.setViewControllers([controller], direction: .forward, animated: true)
     }
 
     func setConstraints(){
@@ -87,11 +99,18 @@ class PageViewController: UIViewController {
 
 extension PageViewController : UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        nil // MainViewController()
+        nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        nil // MainViewController()
+       nil
     }
+}
+
+extension PageViewController : UIPageViewControllerDelegate {
+//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        print("☀️",#function)
+//    }
+
 
 }

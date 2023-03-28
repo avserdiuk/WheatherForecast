@@ -20,6 +20,9 @@
 		414B536E29CEFFC300266E69 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */; };
 		414B536F29CEFFC300266E69 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536C29CEFFC300266E69 /* Rubik-Bold.ttf */; };
 		414B537029CEFFC300266E69 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */; };
+		414B537229D1CF9E00266E69 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B537129D1CF9E00266E69 /* NetworkManager.swift */; };
+		414B537429D1DEE100266E69 /* Struct template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B537329D1DEE100266E69 /* Struct template.swift */; };
+		414B537629D3328300266E69 /* Wheather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B537529D3328300266E69 /* Wheather.swift */; };
 		4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256529C8503200CCE6D4 /* AppDelegate.swift */; };
 		4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256729C8503200CCE6D4 /* SceneDelegate.swift */; };
 		4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256929C8503200CCE6D4 /* SettingViewController.swift */; };
@@ -50,6 +53,9 @@
 		414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		414B536C29CEFFC300266E69 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		414B537129D1CF9E00266E69 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		414B537329D1DEE100266E69 /* Struct template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct template.swift"; sourceTree = "<group>"; };
+		414B537529D3328300266E69 /* Wheather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wheather.swift; sourceTree = "<group>"; };
 		4171256229C8503200CCE6D4 /* WheatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4171256529C8503200CCE6D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4171256729C8503200CCE6D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +185,9 @@
 				4171257F29C8639000CCE6D4 /* Colors.swift */,
 				4171258229C868BC00CCE6D4 /* Texts.swift */,
 				414B536929CEFD5A00266E69 /* Fonts.swift */,
+				414B537129D1CF9E00266E69 /* NetworkManager.swift */,
+				414B537329D1DEE100266E69 /* Struct template.swift */,
+				414B537529D3328300266E69 /* Wheather.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,12 +277,15 @@
 			files = (
 				4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */,
 				414B535D29CDD60100266E69 /* CustomDailyWheatherTableViewCell.swift in Sources */,
+				414B537229D1CF9E00266E69 /* NetworkManager.swift in Sources */,
 				41D9556229C9FD3D0000CFAB /* CustomSectionHeader.swift in Sources */,
 				4171258329C868BC00CCE6D4 /* Texts.swift in Sources */,
+				414B537629D3328300266E69 /* Wheather.swift in Sources */,
 				414B535329CCBF5700266E69 /* CustomTable24hViewCell.swift in Sources */,
 				4171258029C8639000CCE6D4 /* Colors.swift in Sources */,
 				414B535529CDC02B00266E69 /* DailyWheatherViewController.swift in Sources */,
 				4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */,
+				414B537429D1DEE100266E69 /* Struct template.swift in Sources */,
 				4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */,
 				414B536129CE242600266E69 /* CustomDailyWheatherAirQualityTableViewCell.swift in Sources */,
 				414B536A29CEFD5A00266E69 /* Fonts.swift in Sources */,

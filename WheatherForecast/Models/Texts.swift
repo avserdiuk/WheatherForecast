@@ -22,7 +22,7 @@ let settingsButtonLabel = "Установить"
 
 let mainTableHeaderAdditionTitle = "Подробнее на 24 часа"
 let mainSectionHeaderTitle = "Ежедневный прогноз"
-let mainSectionHeaderAdditionTitle = "25 дней"
+let mainSectionHeaderAdditionTitle = "7 дней"
 
 let forecast24BackButtonTitleLabel = "Прогноз на 24 часа"
 let forecast24Add1Label = "Преимущественно"

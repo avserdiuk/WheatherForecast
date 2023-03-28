@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     weak var viewController : UIViewController?
+    var wheather : Wheather?
 
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -28,7 +29,6 @@ class MainViewController: UIViewController {
 
         view.addSubview(tableView)
         setConstraints()
-
     }
 
     func setConstraints(){
@@ -38,6 +38,9 @@ class MainViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
     }
 }
 
@@ -53,6 +56,9 @@ extension MainViewController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = CustomTableViewCell()
+        if let wheather = wheather {
+            cell.setup(wheather, indexPath)
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -63,6 +69,10 @@ extension MainViewController : UITableViewDelegate {
         guard section == 1 else {
             let cell = CustomTableHeader()
             cell.viewController = self.viewController
+            if let wheather = wheather {
+                cell.wheather = wheather
+                cell.setup(wheather)
+            }
             return cell
         }
         return CustomSectionHeader()

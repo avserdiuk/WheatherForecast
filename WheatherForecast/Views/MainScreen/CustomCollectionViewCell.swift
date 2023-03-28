@@ -30,6 +30,12 @@ class CustomCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func setup(_ wheater: Wheather, _ indexPath: IndexPath) {
+        timeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].hour):00"
+        imageView.image = UIImage(named: "\(wheater.forecasts[0].hours[indexPath.row].condition)")
+        degreeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].temp)"
+    }
+
     func setViews(){
         addSubview(stackView)
         stackView.addArrangedSubview(timeLabel)
@@ -47,6 +53,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
             timeLabel.heightAnchor.constraint(equalToConstant: 18),
             imageView.heightAnchor.constraint(equalToConstant: 16),
+            imageView.widthAnchor.constraint(equalToConstant: 15)
 
         ])
     }
