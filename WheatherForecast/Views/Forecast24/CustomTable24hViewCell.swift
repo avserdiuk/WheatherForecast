@@ -23,10 +23,10 @@ class CustomTable24hViewCell: UITableViewCell {
     private lazy var cloudImageView = CVImage(imageName: "forecast24_cloud")
 
     private lazy var add2StackView = CVStackView(axis: .vertical, spacing: 9)
-    private lazy var add1Label = CVLabel(text: "Преимущественно", size: 14, weight: .regular)
-    private lazy var add2Label = CVLabel(text: "Ветер", size: 14, weight: .regular)
-    private lazy var add3Label = CVLabel(text: "Атмосферные осадки", size: 14, weight: .regular)
-    private lazy var add4Label = CVLabel(text: "Облачность", size: 14, weight: .regular)
+    private lazy var add1Label = CVLabel(text: forecast24Add1Label, size: 14, weight: .regular)
+    private lazy var add2Label = CVLabel(text: forecast24Add2Label, size: 14, weight: .regular)
+    private lazy var add3Label = CVLabel(text: forecast24Add3Label, size: 14, weight: .regular)
+    private lazy var add4Label = CVLabel(text: forecast24Add4Label, size: 14, weight: .regular)
 
     private lazy var add3StackView = CVStackView(axis: .vertical, spacing: 9, alignment: .trailing)
     private lazy var add11Label = CVLabel(text: "10", size: 14, weight: .regular, color: .textGray)
@@ -40,6 +40,32 @@ class CustomTable24hViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = Colors.backgroundWhite.color
 
+        setViews()
+        setConstraints()
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup(_ wheather : Wheather, _ indexPath: IndexPath){
+//        dateLabel.text = getTime(unixtime: wheather.forecasts[indexPath.row].unixtime)
+//        titleLabel.text = getCondition(wheather.forecasts[indexPath.row].parts.day.condition)
+//        degreeLabel.text = "\(wheather.forecasts[indexPath.row].parts.night.tempMin)°/\(wheather.forecasts[indexPath.row].parts.day.tempMax)°"
+//        rainLabel.text =  "\(wheather.forecasts[indexPath.row].parts.day.precipitation*100)%"
+//        rainImage.image = UIImage(named: "\(wheather.forecasts[indexPath.row].parts.day.condition)")
+    }
+
+    func getTime(unixtime : Int) -> String {
+        let date = NSDate(timeIntervalSince1970: TimeInterval(unixtime))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E dd/MM "
+        let dateInFormat = dateFormatter.string(from: date as Date)
+        return dateInFormat
+    }
+
+    func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(mainStackView)
             mainStackView.addArrangedSubview(dateLabel)
@@ -61,7 +87,9 @@ class CustomTable24hViewCell: UITableViewCell {
             add3StackView.addArrangedSubview(add33Label)
             add3StackView.addArrangedSubview(add44Label)
         wrapperView.addSubview(hrView)
+    }
 
+    func setConstraints(){
         NSLayoutConstraint.activate([
 
             wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
@@ -75,7 +103,7 @@ class CustomTable24hViewCell: UITableViewCell {
 
             dateLabel.heightAnchor.constraint(equalToConstant: 22),
             timeLabel.heightAnchor.constraint(equalToConstant: 19),
-            
+
             add1StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 33),
             add1StackView.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 88),
 
@@ -92,9 +120,4 @@ class CustomTable24hViewCell: UITableViewCell {
 
         ])
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

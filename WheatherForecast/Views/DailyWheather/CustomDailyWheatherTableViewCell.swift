@@ -9,8 +9,10 @@ import UIKit
 
 class CustomDailyWheatherTableViewCell: UITableViewCell {
 
+    var wheather : Wheather?
+
     private lazy var wrapperView = CVView(backgroundColor: .backgroundWhite, cornerRadius: 5)
-    private lazy var titleLabel = CVLabel(text: "День", size: 18, weight: .regular)
+    private lazy var titleLabel = CVLabel(text: dailyWheatherTitleLabel, size: 18, weight: .regular)
     private lazy var topStackView = CVStackView(axis: .horizontal, spacing: 10)
     private lazy var wheatherImageView = CVImage(imageName: "rain24h")
     private lazy var dergeeLable = CVLabel(text: "13°", size: 30, weight: .regular)
@@ -24,11 +26,11 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
     private lazy var row5IcoImageView = CVImage(imageName: "dailyIcoCloud")
 
     private lazy var label1StackView = CVStackView(axis: .vertical, spacing: 22.5)
-    private lazy var row01Label = CVLabel(text: "По ощущениям", size: 14, weight: .regular)
-    private lazy var row02Label = CVLabel(text: "Ветер", size: 14, weight: .regular)
-    private lazy var row03Label = CVLabel(text: "УФ индекс", size: 14, weight: .regular)
-    private lazy var row04Label = CVLabel(text: "Дождь", size: 14, weight: .regular)
-    private lazy var row05Label = CVLabel(text: "Облачность", size: 14, weight: .regular)
+    private lazy var row01Label = CVLabel(text: dailyWheatherRow01Label, size: 14, weight: .regular)
+    private lazy var row02Label = CVLabel(text: dailyWheatherRow02Label, size: 14, weight: .regular)
+    private lazy var row03Label = CVLabel(text: dailyWheatherRow03Label, size: 14, weight: .regular)
+    private lazy var row04Label = CVLabel(text: dailyWheatherRow04Label, size: 14, weight: .regular)
+    private lazy var row05Label = CVLabel(text: dailyWheatherRow05Label, size: 14, weight: .regular)
 
     private lazy var label2StackView = CVStackView(axis: .vertical, spacing: 17.5, alignment: .trailing)
     private lazy var row11Label = CVLabel(text: "11°", size: 18, weight: .regular)
@@ -40,39 +42,60 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setViews()
+        setConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup(_ timeOfDay: String, _ wheather : Day, _ indexPath: IndexPath){
+        titleLabel.text = timeOfDay
+        dergeeLable.text = "\(wheather.tempAvg)°"
+        wheatherLable.text = "\(getCondition(wheather.condition))"
+        row11Label.text = "\(wheather.tempFeelLike)°"
+        row12Label.text = "\(wheather.windSpeed) м/с \(getWindDir(wheather.windDir))"
+        row13Label.text = "\(getUvIndex(wheather.uvIndex ?? 0))"
+        row14Label.text = "\(Int(wheather.precipitation)*100)%"
+        row15Label.text = "\(Int(wheather.cloudness)*100)%"
+    }
+
+    func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(titleLabel)
         wrapperView.addSubview(topStackView)
-            topStackView.addArrangedSubview(wheatherImageView)
-            topStackView.addArrangedSubview(dergeeLable)
+        topStackView.addArrangedSubview(wheatherImageView)
+        topStackView.addArrangedSubview(dergeeLable)
         wrapperView.addSubview(wheatherLable)
         wrapperView.addSubview(icoStackView)
-            icoStackView.addArrangedSubview(row1IcoImageView)
-            icoStackView.addArrangedSubview(row2IcoImageView)
-            icoStackView.addArrangedSubview(row3IcoImageView)
-            icoStackView.addArrangedSubview(row4IcoImageView)
-            icoStackView.addArrangedSubview(row5IcoImageView)
+        icoStackView.addArrangedSubview(row1IcoImageView)
+        icoStackView.addArrangedSubview(row2IcoImageView)
+        icoStackView.addArrangedSubview(row3IcoImageView)
+        icoStackView.addArrangedSubview(row4IcoImageView)
+        icoStackView.addArrangedSubview(row5IcoImageView)
         wrapperView.addSubview(label1StackView)
-            label1StackView.addArrangedSubview(row01Label)
-            label1StackView.addArrangedSubview(row02Label)
-            label1StackView.addArrangedSubview(row03Label)
-            label1StackView.addArrangedSubview(row04Label)
-            label1StackView.addArrangedSubview(row05Label)
+        label1StackView.addArrangedSubview(row01Label)
+        label1StackView.addArrangedSubview(row02Label)
+        label1StackView.addArrangedSubview(row03Label)
+        label1StackView.addArrangedSubview(row04Label)
+        label1StackView.addArrangedSubview(row05Label)
         wrapperView.addSubview(label2StackView)
-            label2StackView.addArrangedSubview(row11Label)
-            label2StackView.addArrangedSubview(row12Label)
-            label2StackView.addArrangedSubview(row13Label)
-            label2StackView.addArrangedSubview(row14Label)
-            label2StackView.addArrangedSubview(row15Label)
+        label2StackView.addArrangedSubview(row11Label)
+        label2StackView.addArrangedSubview(row12Label)
+        label2StackView.addArrangedSubview(row13Label)
+        label2StackView.addArrangedSubview(row14Label)
+        label2StackView.addArrangedSubview(row15Label)
+    }
 
-
+    func setConstraints(){
         NSLayoutConstraint.activate([
             wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             wrapperView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             wrapperView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             wrapperView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 0),
 
-            titleLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 15),
+            titleLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 25),
             titleLabel.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 15),
 
             wheatherImageView.widthAnchor.constraint(equalToConstant: 26),
@@ -92,13 +115,7 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
             label2StackView.rightAnchor.constraint(equalTo: wrapperView.rightAnchor, constant: -15),
             label2StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 112),
             label2StackView.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor, constant: -20)
-            
+
         ])
-
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

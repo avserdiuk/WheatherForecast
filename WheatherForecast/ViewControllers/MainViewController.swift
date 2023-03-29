@@ -9,13 +9,15 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    weak var viewController : UIViewController?
+    var wheather : Wheather?
+
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
         table.backgroundColor = .white
-        table.allowsSelection = false
         table.showsVerticalScrollIndicator = false
         table.separatorColor = .clear
         return table
@@ -26,17 +28,20 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
 
         view.addSubview(tableView)
+        setConstraints()
+    }
 
+    func setConstraints(){
         NSLayoutConstraint.activate([
-
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
-
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+    }
 }
 
 extension MainViewController : UITableViewDataSource {
@@ -45,21 +50,38 @@ extension MainViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard section == 1 else { return 0}
-        return 10
+        guard section == 1 else { return 0 }
+        return 7
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return CustomTableViewCell()
+        let cell = CustomTableViewCell()
+        if let wheather = wheather {
+            cell.setup(wheather, indexPath)
+        }
+        cell.selectionStyle = .none
+        return cell
     }
-
-
 }
 
 extension MainViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 1 else { return CustomTableHeader()}
+        guard section == 1 else {
+            let cell = CustomTableHeader()
+            cell.viewController = self.viewController
+            if let wheather = wheather {
+                cell.wheather = wheather
+                cell.setup(wheather)
+            }
+            return cell
+        }
         return CustomSectionHeader()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = DailyWheatherViewController()
+        controller.wheather = wheather
+        controller.index = indexPath.row
+        viewController?.navigationController?.pushViewController(controller, animated: true)
+    }
 }

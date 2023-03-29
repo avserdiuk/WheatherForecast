@@ -9,6 +9,9 @@ import UIKit
 
 class Forecast24ViewController: UIViewController {
 
+    weak var viewController : UIViewController?
+    var wheather : Wheather?
+
     private lazy var backButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +20,7 @@ class Forecast24ViewController: UIViewController {
         return button
     }()
 
-    private lazy var backButtonTitleLabel = CVButton(title: "Прогноз на 24 часа", titleSize: 16, titleColor: .textGray)
+    private lazy var backButtonTitleLabel = CVButton(title: forecast24BackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
     private lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
 
     private lazy var tableView : UITableView = {
@@ -34,13 +37,29 @@ class Forecast24ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        setViews()
+        setConstraints()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+
+    @objc func didTapBackButton(){
+        navigationController?.isNavigationBarHidden = false
+        viewController?.navigationController?.popViewController(animated: true)
+    }
+
+    func setViews(){
         view.addSubview(backButton)
         view.addSubview(backButtonTitleLabel)
         view.addSubview(titleLabel)
         view.addSubview(tableView)
+    }
 
-
-
+    func setConstraints(){
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
@@ -55,30 +74,22 @@ class Forecast24ViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-
         ])
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.isNavigationBarHidden = true
-    }
-
-
-    @objc func didTapBackButton(){
-        navigationController?.popViewController(animated: true)
-    }
-
 }
 
 extension Forecast24ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        7
+        guard let wheather else { return 0 }
+        return wheather.forecasts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return CustomTable24hViewCell()
+        let cell = CustomTable24hViewCell()
+        if let wheather = wheather {
+            cell.setup(wheather, indexPath)
+        }
+        return cell
     }
 }
 

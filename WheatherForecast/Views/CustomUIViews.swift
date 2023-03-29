@@ -93,7 +93,6 @@ class CVStackView : UIStackView {
 }
 
 class CVSwithcer : UIButton {
-
     @objc func didTap(){
         self.isSelected.toggle()
     }

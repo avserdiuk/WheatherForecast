@@ -10,7 +10,7 @@ import UIKit
 class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
 
     private lazy var wrapperView = CVView()
-    private lazy var titleLabel = CVLabel(text: "Солнце и луна", size: 18, weight: .regular)
+    private lazy var titleLabel = CVLabel(text: dailyWheatherSunMoonTitleLabel, size: 18, weight: .regular)
 
     private lazy var leftView = CVView()
     private lazy var rightView = CVView()
@@ -18,8 +18,8 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
 
     private lazy var leftStackView1 = CVStackView(axis: .vertical, spacing: 17)
     private lazy var leftImageView = CVImage(imageName: "sunSM")
-    private lazy var leftItem01Label = CVLabel(text: "Восход", size: 14, weight: .regular, color: .textGray)
-    private lazy var leftItem02Label = CVLabel(text: "Заход", size: 14, weight: .regular, color: .textGray)
+    private lazy var leftItem01Label = CVLabel(text: dailyWheatherSunMoonLeftItem01Label, size: 14, weight: .regular, color: .textGray)
+    private lazy var leftItem02Label = CVLabel(text: dailyWheatherSunMoonLeftItem02Label, size: 14, weight: .regular, color: .textGray)
 
     private lazy var leftStackView2 = CVStackView(axis: .vertical, spacing: 17, alignment: .trailing)
     private lazy var leftItem10Label = CVLabel(text: "14 ч 26 м", size: 16, weight: .regular)
@@ -29,8 +29,8 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
 
     private lazy var rightStackView1 = CVStackView(axis: .vertical, spacing: 17)
     private lazy var rightImageView = CVImage(imageName: "moonSM")
-    private lazy var rightItem01Label = CVLabel(text: "Восход", size: 14, weight: .regular, color: .textGray)
-    private lazy var rightItem02Label = CVLabel(text: "Заход", size: 14, weight: .regular, color: .textGray)
+    private lazy var rightItem01Label = CVLabel(text: dailyWheatherSunMoonLeftItem01Label, size: 14, weight: .regular, color: .textGray)
+    private lazy var rightItem02Label = CVLabel(text: dailyWheatherSunMoonLeftItem02Label, size: 14, weight: .regular, color: .textGray)
 
     private lazy var rightStackView2 = CVStackView(axis: .vertical, spacing: 17, alignment: .trailing)
     private lazy var rightItem10Label = CVLabel(text: "14 ч 26 м", size: 16, weight: .regular)
@@ -41,28 +41,47 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setViews()
+        setConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup(_ wheather: Forecast){
+        leftItem11Label.text = wheather.sunrise
+        leftItem12Label.text = wheather.sunset
+
+        rightItem11Label.text = wheather.sunset
+        rightItem12Label.text = wheather.sunrise
+    }
+
+    func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(titleLabel)
         wrapperView.addSubview(leftView)
         leftView.addSubview(leftStackView1)
         leftView.addSubview(leftImageView)
-            leftStackView1.addArrangedSubview(leftItem01Label)
-            leftStackView1.addArrangedSubview(leftItem02Label)
+        leftStackView1.addArrangedSubview(leftItem01Label)
+        leftStackView1.addArrangedSubview(leftItem02Label)
         leftView.addSubview(leftStackView2)
-            leftStackView2.addArrangedSubview(leftItem10Label)
-            leftStackView2.addArrangedSubview(leftItem11Label)
-            leftStackView2.addArrangedSubview(leftItem12Label)
+        leftStackView2.addArrangedSubview(leftItem10Label)
+        leftStackView2.addArrangedSubview(leftItem11Label)
+        leftStackView2.addArrangedSubview(leftItem12Label)
         rightView.addSubview(rightStackView1)
         rightView.addSubview(rightImageView)
-            rightStackView1.addArrangedSubview(rightItem01Label)
-            rightStackView1.addArrangedSubview(rightItem02Label)
+        rightStackView1.addArrangedSubview(rightItem01Label)
+        rightStackView1.addArrangedSubview(rightItem02Label)
         rightView.addSubview(rightStackView2)
-            rightStackView2.addArrangedSubview(rightItem10Label)
-            rightStackView2.addArrangedSubview(rightItem11Label)
-            rightStackView2.addArrangedSubview(rightItem12Label)
+        rightStackView2.addArrangedSubview(rightItem10Label)
+        rightStackView2.addArrangedSubview(rightItem11Label)
+        rightStackView2.addArrangedSubview(rightItem12Label)
         wrapperView.addSubview(vr)
         wrapperView.addSubview(rightView)
+    }
 
+    func setConstraints(){
         NSLayoutConstraint.activate([
             wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             wrapperView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
@@ -107,9 +126,4 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
             rightView.heightAnchor.constraint(equalToConstant: 97),
         ])
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

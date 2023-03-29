@@ -54,6 +54,8 @@ class PermissionViewController: UIViewController {
 
         setViews()
         setConstraints()
+
+        acceptButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
 
     func setViews(){
@@ -63,14 +65,6 @@ class PermissionViewController: UIViewController {
         view.addSubview(subtitle2Label)
         view.addSubview(acceptButton)
         view.addSubview(declineButton)
-
-        acceptButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-    }
-
-    @objc func didTapButton(){
-        let controller = Forecast24ViewController()
-
-        navigationController?.pushViewController(controller, animated: true)
     }
 
     func setConstraints(){
@@ -105,5 +99,9 @@ class PermissionViewController: UIViewController {
             declineButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
         ])
+    }
+
+    @objc func didTapButton(){
+        navigationController?.pushViewController(Forecast24ViewController(), animated: true)
     }
 }

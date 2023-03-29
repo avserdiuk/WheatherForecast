@@ -9,6 +9,9 @@ import UIKit
 
 class DailyWheatherViewController: UIViewController {
 
+    var wheather : Wheather?
+    var index : Int = 0
+
     private lazy var backButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -17,10 +20,10 @@ class DailyWheatherViewController: UIViewController {
         return button
     }()
 
-    private lazy var backButtonTitleLabel = CVButton(title: "Дневная погода", titleSize: 16, titleColor: .textGray)
+    private lazy var backButtonTitleLabel = CVButton(title: dailyWheatherBackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
     private lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
 
-    private lazy var tableView : UITableView = {
+    lazy var tableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -35,13 +38,24 @@ class DailyWheatherViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        setViews()
+        setConstraints()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+
+    func setViews(){
         view.addSubview(backButton)
         view.addSubview(backButtonTitleLabel)
         view.addSubview(titleLabel)
         view.addSubview(tableView)
+    }
 
-
-
+    func setConstraints(){
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
@@ -56,21 +70,13 @@ class DailyWheatherViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-
         ])
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.isNavigationBarHidden = true
-    }
-
-
     @objc func didTapBackButton(){
+        navigationController?.isNavigationBarHidden = false
         navigationController?.popViewController(animated: true)
     }
-
 }
 
 extension DailyWheatherViewController : UITableViewDataSource {
@@ -79,19 +85,32 @@ extension DailyWheatherViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 || indexPath.row == 1 {
-            return CustomDailyWheatherTableViewCell()
+        guard let wheather else { return UITableViewCell() }
+        
+        if indexPath.row == 0 {
+            let cell = CustomDailyWheatherTableViewCell()
+            cell.setup("День", wheather.forecasts[index].parts.day, indexPath)
+            return cell
+        } else if indexPath.row == 1 {
+            let cell = CustomDailyWheatherTableViewCell()
+            cell.setup("Ночь", wheather.forecasts[index].parts.night, indexPath)
+            return cell
         } else if indexPath.row == 2 {
-            return CustomDailyWheatherDayNightTableViewCell()
+            let cell = CustomDailyWheatherDayNightTableViewCell()
+            cell.setup(wheather.forecasts[index])
+            return cell
         } else {
             return CustomDailyWheatherAirQualityTableViewCell()
         }
-
     }
 }
 
 extension DailyWheatherViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        CustomDailyWheatherTableHeader()
+        let header = CustomDailyWheatherTableHeader()
+        header.wheather = wheather
+        header.index = index
+        header.delegate = self
+        return header
     }
 }

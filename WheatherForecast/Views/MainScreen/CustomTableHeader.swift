@@ -9,6 +9,9 @@ import UIKit
 
 class CustomTableHeader: UITableViewHeaderFooterView {
 
+    weak var viewController : UIViewController?
+    var wheather : Wheather?
+
     private lazy var wrapper = CVView()
 
     private lazy var view = CVView(backgroundColor: .accentBlue)
@@ -20,7 +23,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
     private lazy var dayNightTempLabel = CVLabel(text: "7°/13°", size: 16, weight: .regular, color: .textWhite)
     private lazy var nowTempLabel = CVLabel(text: "13°", size: 36, weight: .semibold, color: .textWhite)
-    private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 16, weight: .regular, color: .textWhite)
+    private lazy var nowDescLabel = CVLabel(text: "Возможен небольшой дождь", size: 18, weight: .regular, color: .textWhite)
 
     private lazy var additionStackView = CVStackView(axis: .horizontal, spacing: 20)
 
@@ -58,7 +61,8 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         collection.dataSource = self
         collection.delegate = self
         collection.backgroundColor = Colors.transparent.color
-        collection.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        collection.contentInset
+        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return collection
     }()
 
@@ -68,10 +72,39 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         setViews()
         setConstraints()
 
+        more24hButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup(_ wheather : Wheather){
+        self.sunRiseLabel.text = "\(wheather.forecasts[0].sunrise)"
+        self.sunSetLabel.text = "\(wheather.forecasts[0].sunset)"
+        self.nowTempLabel.text = "\(wheather.fact.temp)°"
+        self.nowDescLabel.text = getCondition(wheather.fact.condition)
+        self.sunViewLabel.text = "\(Int(wheather.fact.cloudness*100))%"
+        self.windViewLabel.text = "\(wheather.fact.windSpeed) м/с"
+        self.rainViewLabel.text = "\(Int(wheather.fact.humidity))%"
+        self.dataTimeLabel.text = "\(self.getCurrentTime())"
+        self.dayNightTempLabel.text = "\(wheather.forecasts[0].parts.night.tempMin)°/\(wheather.forecasts[0].parts.day.tempMax)°"
+
+    }
+
+    @objc func didTap(){
+        let controller = Forecast24ViewController()
+        controller.viewController = viewController
+        controller.wheather = wheather
+        viewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func getCurrentTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm, E dd MMMM "
+        let dateInFormat = dateFormatter.string(from: NSDate() as Date)
+        return dateInFormat
     }
 
     func setViews(){
@@ -177,21 +210,22 @@ class CustomTableHeader: UITableViewHeaderFooterView {
             more24hCollectionView.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 0),
             more24hCollectionView.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: 0),
             more24hCollectionView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -24)
-
         ])
     }
 }
 
 extension CustomTableHeader : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        24
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCollectionViewCell
+        if let wheather = wheather {
+            cell.setup(wheather, indexPath)
+        }
         return cell
     }
-
 }
 
 extension CustomTableHeader : UICollectionViewDelegateFlowLayout {
