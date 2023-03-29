@@ -49,6 +49,14 @@ class CustomDailyWheatherDayNightTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func setup(_ wheather: Forecast){
+        leftItem11Label.text = wheather.sunrise
+        leftItem12Label.text = wheather.sunset
+
+        rightItem11Label.text = wheather.sunset
+        rightItem12Label.text = wheather.sunrise
+    }
+
     func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(titleLabel)

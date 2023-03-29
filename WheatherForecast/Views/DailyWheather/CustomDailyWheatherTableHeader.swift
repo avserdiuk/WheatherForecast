@@ -9,6 +9,7 @@ import UIKit
 
 class CustomDailyWheatherTableHeader: UITableViewHeaderFooterView {
 
+    weak var delegate: DailyWheatherViewController!
     var wheather : Wheather?
     var index : Int?
 
@@ -88,6 +89,7 @@ extension CustomDailyWheatherTableHeader : UICollectionViewDataSource {
 
 extension CustomDailyWheatherTableHeader : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        delegate.index = indexPath.item
+        delegate.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
     }
 }
