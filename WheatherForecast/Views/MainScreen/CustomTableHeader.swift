@@ -11,10 +11,11 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
     weak var viewController : UIViewController?
     var wheather : Wheather?
+    var indexMass : [Int] = []
 
     private lazy var wrapper = CVView()
 
-    private lazy var view = CVView(backgroundColor: .accentBlue)
+    private lazy var view = CVView(backgroundColor: .accentBlue,cornerRadius: 5)
     private lazy var elipseImageView = CVImage(imageName: "elipse")
     private lazy var sunRiseLabel = CVLabel(text: "06:00", size: 15, weight: .semibold, color: .textWhite)
     private lazy var sunSetLabel = CVLabel(text: "19:00", size: 15, weight: .semibold, color: .textWhite)
@@ -46,6 +47,8 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         titleSize: 16,
         titleWeight: .regular)
 
+    private lazy var more24hButtonLine = CVView(backgroundColor: .textBlack)
+
     private lazy var collectionLayout : UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -71,13 +74,23 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
         setViews()
         setConstraints()
+        getIndixes()
 
         more24hButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func getIndixes(){
+        let currentHour = getCurrentHour()-1
+        for i in currentHour...23 {
+            indexMass.append(i)
+        }
+        for k in 0...currentHour-1 {
+            indexMass.append(k)
+        }
     }
 
     func setup(_ wheather : Wheather){
@@ -90,7 +103,6 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         self.rainViewLabel.text = "\(Int(wheather.fact.humidity))%"
         self.dataTimeLabel.text = "\(self.getCurrentTime())"
         self.dayNightTempLabel.text = "\(wheather.forecasts[0].parts.night.tempMin)°/\(wheather.forecasts[0].parts.day.tempMax)°"
-
     }
 
     @objc func didTap(){
@@ -105,6 +117,13 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         dateFormatter.dateFormat = "HH:mm, E dd MMMM "
         let dateInFormat = dateFormatter.string(from: NSDate() as Date)
         return dateInFormat
+    }
+
+    func getCurrentHour() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let dateInFormat = dateFormatter.string(from: NSDate() as Date)
+        return Int(dateInFormat)!
     }
 
     func setViews(){
@@ -135,6 +154,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         stackView.addArrangedSubview(dataTimeLabel)
 
         wrapper.addSubview(more24hButton)
+        wrapper.addSubview(more24hButtonLine)
         wrapper.addSubview(more24hCollectionView)
     }
 
@@ -206,24 +226,42 @@ class CustomTableHeader: UITableViewHeaderFooterView {
             more24hButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 20),
             more24hButton.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: -16),
 
+            more24hButtonLine.heightAnchor.constraint(equalToConstant: 0.5),
+            more24hButtonLine.widthAnchor.constraint(equalToConstant: 175),
+            more24hButtonLine.centerXAnchor.constraint(equalTo: more24hButton.centerXAnchor),
+            more24hButtonLine.bottomAnchor.constraint(equalTo: more24hButton.bottomAnchor, constant: -6),
+
             more24hCollectionView.topAnchor.constraint(equalTo: more24hButton.bottomAnchor, constant: 10),
             more24hCollectionView.leftAnchor.constraint(equalTo: wrapper.leftAnchor, constant: 0),
             more24hCollectionView.rightAnchor.constraint(equalTo: wrapper.rightAnchor, constant: 0),
             more24hCollectionView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -24)
         ])
     }
+
 }
 
 extension CustomTableHeader : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        24
+        return 24
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCollectionViewCell
-        if let wheather = wheather {
-            cell.setup(wheather, indexPath)
+
+        if indexPath.item == 1 {
+            cell.contentView.backgroundColor = Colors.accentBlue.color
+
+            let label = cell.viewWithTag(1) as? UILabel
+            label?.textColor = UIColor.white
+
+            let label2 = cell.viewWithTag(2) as? UILabel
+            label2?.textColor = UIColor.white
         }
+
+        if let wheather = wheather {
+            cell.setup(wheather, indexMass[indexPath.item])
+        }
+
         return cell
     }
 }

@@ -11,9 +11,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
     private lazy var stackView = CVStackView(axis: .vertical, spacing: 5, alignment: .center)
 
-    private lazy var timeLabel = CVLabel(text: "12:00", size: 14, weight: .regular, numberOfLines: 1)
+    private lazy var timeLabel = CVLabel(text: "12:00", size: 14, weight: .regular, numberOfLines: 1, tag: 1)
     private lazy var imageView = CVImage(imageName: "sun24h")
-    private lazy var degreeLabel = CVLabel(text: "23", size: 16, weight: .regular)
+    private lazy var degreeLabel = CVLabel(text: "23", size: 16, weight: .regular, tag: 2)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,6 +21,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderWidth = 0.5
         contentView.layer.borderColor = Colors.borderBlue.color.cgColor
         contentView.layer.cornerRadius = 22
+        contentView.clipsToBounds = true
 
         setViews()
         setConstraints()
@@ -30,10 +31,38 @@ class CustomCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(_ wheater: Wheather, _ indexPath: IndexPath) {
-        timeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].hour):00"
-        imageView.image = UIImage(named: "\(wheater.forecasts[0].hours[indexPath.row].condition)")
-        degreeLabel.text = "\(wheater.forecasts[0].hours[indexPath.row].temp)°"
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentView.backgroundColor = .white
+
+        let label = viewWithTag(1) as? UILabel
+        label?.textColor = UIColor.black
+
+        let label1 = viewWithTag(2) as? UILabel
+        label1?.textColor = UIColor.black
+    }
+
+    func setup(_ wheater: Wheather, _ index: Int) {
+
+        let currentHour = getCurrentHour()
+        
+        if index >= currentHour {
+            timeLabel.text = "\(wheater.forecasts[0].hours[index].hour):00"
+            imageView.image = UIImage(named: "\(wheater.forecasts[0].hours[index].condition)")
+            degreeLabel.text = "\(wheater.forecasts[0].hours[index].temp)°"
+        } else {
+            timeLabel.text = "\(wheater.forecasts[1].hours[index].hour):00"
+            imageView.image = UIImage(named: "\(wheater.forecasts[1].hours[index].condition)")
+            degreeLabel.text = "\(wheater.forecasts[1].hours[index].temp)°"
+        }
+
+    }
+
+    func getCurrentHour() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let dateInFormat = dateFormatter.string(from: NSDate() as Date)
+        return Int(dateInFormat)!
     }
 
     func setViews(){
