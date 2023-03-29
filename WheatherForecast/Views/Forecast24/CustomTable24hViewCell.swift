@@ -49,6 +49,22 @@ class CustomTable24hViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func setup(_ wheather : Wheather, _ indexPath: IndexPath){
+//        dateLabel.text = getTime(unixtime: wheather.forecasts[indexPath.row].unixtime)
+//        titleLabel.text = getCondition(wheather.forecasts[indexPath.row].parts.day.condition)
+//        degreeLabel.text = "\(wheather.forecasts[indexPath.row].parts.night.tempMin)°/\(wheather.forecasts[indexPath.row].parts.day.tempMax)°"
+//        rainLabel.text =  "\(wheather.forecasts[indexPath.row].parts.day.precipitation*100)%"
+//        rainImage.image = UIImage(named: "\(wheather.forecasts[indexPath.row].parts.day.condition)")
+    }
+
+    func getTime(unixtime : Int) -> String {
+        let date = NSDate(timeIntervalSince1970: TimeInterval(unixtime))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E dd/MM "
+        let dateInFormat = dateFormatter.string(from: date as Date)
+        return dateInFormat
+    }
+
     func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(mainStackView)

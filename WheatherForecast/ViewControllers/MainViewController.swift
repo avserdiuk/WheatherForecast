@@ -79,6 +79,9 @@ extension MainViewController : UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewController?.navigationController?.pushViewController(DailyWheatherViewController(), animated: true)
+        let controller = DailyWheatherViewController()
+        controller.wheather = wheather
+        controller.index = indexPath.row
+        viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 }

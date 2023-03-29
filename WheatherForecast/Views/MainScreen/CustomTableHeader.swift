@@ -96,6 +96,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
     @objc func didTap(){
         let controller = Forecast24ViewController()
         controller.viewController = viewController
+        controller.wheather = wheather
         viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 

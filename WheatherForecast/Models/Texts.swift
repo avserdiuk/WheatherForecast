@@ -90,3 +90,45 @@ func getCondition(_ condition: String) -> String {
         return "------"
     }
 }
+
+func getWindDir(_ dir: String) -> String{
+    switch dir {
+    case "nw":
+        return "СЗ"
+    case "n":
+        return "С"
+    case "ne":
+        return "СВ"
+    case "e":
+        return "В"
+    case "se":
+        return "ЮВ"
+    case "s":
+        return "С"
+    case "sw":
+        return "ЮВ"
+    case "w":
+        return "З"
+    case "с":
+        return "Ш"
+    default:
+        return "------"
+    }
+}
+
+func getUvIndex(_ uvIndex : Int) -> String {
+    switch uvIndex {
+    case 0...2:
+        return "\(uvIndex) (Низкий)"
+    case 3...5:
+        return "\(uvIndex) (Умеренный)"
+    case 6...7:
+        return "\(uvIndex) (Высокий)"
+    case 8...9:
+        return "\(uvIndex) (Очень высокий)"
+    case 11...15:
+        return "\(uvIndex) (Опасный)"
+    default:
+        return "нет данных"
+    }
+}

@@ -53,14 +53,26 @@ struct Parts: Codable {
 struct Day: Codable {
     let tempMin: Int
     let tempMax: Int
+    let tempAvg: Int
+    let tempFeelLike: Int
     let condition : String
-    let precipitation : Int
+    let precipitation : Double
+    let windSpeed : Double
+    let windDir : String
+    let cloudness: Double
+    let uvIndex: Int?
 
     enum CodingKeys: String, CodingKey {
         case tempMin = "temp_min"
         case tempMax = "temp_max"
+        case tempAvg = "temp_avg"
+        case tempFeelLike = "feels_like"
         case condition
         case precipitation = "prec_strength"
+        case windSpeed = "wind_speed"
+        case windDir = "wind_dir"
+        case cloudness
+        case uvIndex = "uv_index"
     }
 }
 

@@ -42,7 +42,7 @@ class CustomTableViewCell: UITableViewCell {
         dateLabel.text = getTime(unixtime: wheather.forecasts[indexPath.row].unixtime)
         titleLabel.text = getCondition(wheather.forecasts[indexPath.row].parts.day.condition)
         degreeLabel.text = "\(wheather.forecasts[indexPath.row].parts.night.tempMin)°/\(wheather.forecasts[indexPath.row].parts.day.tempMax)°"
-        rainLabel.text =  "\(wheather.forecasts[indexPath.row].parts.day.precipitation*100)%"
+        rainLabel.text =  "\(Int(wheather.forecasts[indexPath.row].parts.day.precipitation*100))%"
         rainImage.image = UIImage(named: "\(wheather.forecasts[indexPath.row].parts.day.condition)")
     }
 

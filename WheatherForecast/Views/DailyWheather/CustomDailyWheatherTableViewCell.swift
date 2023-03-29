@@ -9,6 +9,8 @@ import UIKit
 
 class CustomDailyWheatherTableViewCell: UITableViewCell {
 
+    var wheather : Wheather?
+
     private lazy var wrapperView = CVView(backgroundColor: .backgroundWhite, cornerRadius: 5)
     private lazy var titleLabel = CVLabel(text: dailyWheatherTitleLabel, size: 18, weight: .regular)
     private lazy var topStackView = CVStackView(axis: .horizontal, spacing: 10)
@@ -48,6 +50,17 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func setup(_ timeOfDay: String, _ wheather : Day, _ indexPath: IndexPath){
+        titleLabel.text = timeOfDay
+        dergeeLable.text = "\(wheather.tempAvg)°"
+        wheatherLable.text = "\(getCondition(wheather.condition))"
+        row11Label.text = "\(wheather.tempFeelLike)°"
+        row12Label.text = "\(wheather.windSpeed) м/с \(getWindDir(wheather.windDir))"
+        row13Label.text = "\(getUvIndex(wheather.uvIndex ?? 0))"
+        row14Label.text = "\(Int(wheather.precipitation)*100)%"
+        row15Label.text = "\(Int(wheather.cloudness)*100)%"
+    }
+
     func setViews(){
         addSubview(wrapperView)
         wrapperView.addSubview(titleLabel)
@@ -82,7 +95,7 @@ class CustomDailyWheatherTableViewCell: UITableViewCell {
             wrapperView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             wrapperView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 0),
 
-            titleLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 15),
+            titleLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 25),
             titleLabel.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 15),
 
             wheatherImageView.widthAnchor.constraint(equalToConstant: 26),

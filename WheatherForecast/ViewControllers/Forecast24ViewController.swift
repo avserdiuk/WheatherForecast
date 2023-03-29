@@ -10,6 +10,7 @@ import UIKit
 class Forecast24ViewController: UIViewController {
 
     weak var viewController : UIViewController?
+    var wheather : Wheather?
 
     private lazy var backButton : UIButton = {
         let button = UIButton()
@@ -79,11 +80,16 @@ class Forecast24ViewController: UIViewController {
 
 extension Forecast24ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        7
+        guard let wheather else { return 0 }
+        return wheather.forecasts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return CustomTable24hViewCell()
+        let cell = CustomTable24hViewCell()
+        if let wheather = wheather {
+            cell.setup(wheather, indexPath)
+        }
+        return cell
     }
 }
 

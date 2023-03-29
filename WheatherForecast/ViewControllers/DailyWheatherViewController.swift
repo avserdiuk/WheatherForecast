@@ -9,6 +9,9 @@ import UIKit
 
 class DailyWheatherViewController: UIViewController {
 
+    var wheather : Wheather?
+    var index : Int = 0
+
     private lazy var backButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +23,7 @@ class DailyWheatherViewController: UIViewController {
     private lazy var backButtonTitleLabel = CVButton(title: dailyWheatherBackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
     private lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
 
-    private lazy var tableView : UITableView = {
+    lazy var tableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -37,6 +40,7 @@ class DailyWheatherViewController: UIViewController {
 
         setViews()
         setConstraints()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,10 +85,19 @@ extension DailyWheatherViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 || indexPath.row == 1 {
-            return CustomDailyWheatherTableViewCell()
+        guard let wheather else { return UITableViewCell() }
+
+        if indexPath.row == 0 {
+            let cell = CustomDailyWheatherTableViewCell()
+            cell.setup("День", wheather.forecasts[index].parts.day, indexPath)
+            return cell
+        } else if indexPath.row == 1 {
+            let cell = CustomDailyWheatherTableViewCell()
+            cell.setup("Ночь", wheather.forecasts[index].parts.night, indexPath)
+            return cell
         } else if indexPath.row == 2 {
-            return CustomDailyWheatherDayNightTableViewCell()
+            let cell = CustomDailyWheatherDayNightTableViewCell()
+            return cell
         } else {
             return CustomDailyWheatherAirQualityTableViewCell()
         }
@@ -93,6 +106,9 @@ extension DailyWheatherViewController : UITableViewDataSource {
 
 extension DailyWheatherViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        CustomDailyWheatherTableHeader()
+        let header = CustomDailyWheatherTableHeader()
+        header.wheather = wheather
+        header.index = index
+        return header
     }
 }

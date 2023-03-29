@@ -30,6 +30,13 @@ class PageViewController: UIViewController {
         return pageControl
     }()
 
+    private lazy var activityIndicator : UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        return indicator
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -41,13 +48,12 @@ class PageViewController: UIViewController {
         NetworkManager().getWheater { wheather in
             DispatchQueue.main.async {
 
-                //print(wheather)
-
                 let controller = MainViewController()
                 controller.viewController = self
                 controller.wheather = wheather
                 
                 self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
+                self.activityIndicator.stopAnimating()
             }
         }
     }
@@ -69,6 +75,7 @@ class PageViewController: UIViewController {
     }
 
     func setViews(){
+        view.addSubview(activityIndicator)
         view.addSubview(pageControl)
         view.addSubview(pageViewController.view)
     }
@@ -82,6 +89,9 @@ class PageViewController: UIViewController {
             pageViewController.view.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             pageViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             pageViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 
@@ -108,9 +118,5 @@ extension PageViewController : UIPageViewControllerDataSource {
 }
 
 extension PageViewController : UIPageViewControllerDelegate {
-//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-//        print("☀️",#function)
-//    }
-
 
 }
