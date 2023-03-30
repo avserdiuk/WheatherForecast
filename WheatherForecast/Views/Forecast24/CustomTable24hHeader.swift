@@ -15,6 +15,7 @@ class CustomTable24hHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
 
         addSubview(image)
+        setConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -27,7 +28,6 @@ class CustomTable24hHeader: UITableViewHeaderFooterView {
             image.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
             image.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
             image.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-
         ])
     }
 }

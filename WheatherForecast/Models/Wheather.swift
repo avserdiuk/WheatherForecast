@@ -78,7 +78,24 @@ struct Day: Codable {
 
 struct Hours : Codable {
     let temp : Int
+    let feelsLike : Int
     let hour : String
     let condition : String
+    let windSpeed : Double
+    let windDir : String
+    let precipitation : Double
+    let cloudness: Double
+
+    enum CodingKeys: String, CodingKey {
+        case temp
+        case feelsLike = "feels_like"
+        case hour
+        case condition
+        case windSpeed = "wind_speed"
+        case windDir = "wind_dir"
+        case precipitation = "prec_strength"
+        case cloudness
+
+    }
 }
 

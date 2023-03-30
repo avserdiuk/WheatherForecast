@@ -29,7 +29,7 @@ class CustomTable24hViewCell: UITableViewCell {
     private lazy var add4Label = CVLabel(text: forecast24Add4Label, size: 14, weight: .regular)
 
     private lazy var add3StackView = CVStackView(axis: .vertical, spacing: 9, alignment: .trailing)
-    private lazy var add11Label = CVLabel(text: "10", size: 14, weight: .regular, color: .textGray)
+    private lazy var add11Label = CVLabel(text: " ", size: 14, weight: .regular, color: .textGray)
     private lazy var add22Label = CVLabel(text: "2 м/с ССЗ", size: 14, weight: .regular, color: .textGray)
     private lazy var add33Label = CVLabel(text: "0%", size: 14, weight: .regular, color: .textGray)
     private lazy var add44Label = CVLabel(text: "29%", size: 14, weight: .regular, color: .textGray)
@@ -42,19 +42,37 @@ class CustomTable24hViewCell: UITableViewCell {
 
         setViews()
         setConstraints()
-
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(_ wheather : Wheather, _ indexPath: IndexPath){
-//        dateLabel.text = getTime(unixtime: wheather.forecasts[indexPath.row].unixtime)
-//        titleLabel.text = getCondition(wheather.forecasts[indexPath.row].parts.day.condition)
-//        degreeLabel.text = "\(wheather.forecasts[indexPath.row].parts.night.tempMin)°/\(wheather.forecasts[indexPath.row].parts.day.tempMax)°"
-//        rainLabel.text =  "\(wheather.forecasts[indexPath.row].parts.day.precipitation*100)%"
-//        rainImage.image = UIImage(named: "\(wheather.forecasts[indexPath.row].parts.day.condition)")
+    func setup(_ wheather : Wheather, _ indexPath: IndexPath, _ indexMassive: [Int]){
+
+        let currentHour = getCurrentHourAt3h()
+        var forecastIndex = 0
+
+        if currentHour > indexMassive[indexPath.item] {
+            forecastIndex = 1
+        }
+
+        let item = wheather.forecasts[forecastIndex].hours[indexMassive[indexPath.item]]
+
+        dateLabel.text = getTime(unixtime: wheather.forecasts[forecastIndex].unixtime)
+        timeLabel.text = "\(indexMassive[indexPath.item]):00"
+        degreeLabel.text = "\(item.temp)"
+        add1Label.text = "\(getCondition(item.condition)), по ощущению \(item.feelsLike)"
+        add22Label.text = "\(item.windSpeed) м/с \(getWindDir(item.windDir))"
+        add33Label.text = "\(Int(item.precipitation*100))%"
+        add44Label.text = "\(Int(item.cloudness*100))%"
+    }
+
+    func getCurrentHour() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let dateInFormat = dateFormatter.string(from: NSDate() as Date)
+        return Int(dateInFormat)!
     }
 
     func getTime(unixtime : Int) -> String {
@@ -105,7 +123,7 @@ class CustomTable24hViewCell: UITableViewCell {
             timeLabel.heightAnchor.constraint(equalToConstant: 19),
 
             add1StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 33),
-            add1StackView.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 88),
+            add1StackView.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 58),
 
             add2StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 33),
             add2StackView.leftAnchor.constraint(equalTo: add1StackView.rightAnchor, constant: 10),
