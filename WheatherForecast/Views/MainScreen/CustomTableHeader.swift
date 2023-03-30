@@ -74,7 +74,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
         setViews()
         setConstraints()
-        getIndixes()
+        getIndixesMass()
 
         more24hButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
     }
@@ -83,13 +83,20 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func getIndixes(){
+    func getIndixesMass(){
         let currentHour = getCurrentHour()-1
-        for i in currentHour...23 {
-            indexMass.append(i)
-        }
-        for k in 0...currentHour-1 {
-            indexMass.append(k)
+
+        if currentHour == 0 {
+            for i in currentHour...23 {
+                indexMass.append(i)
+            }
+        } else {
+            for i in currentHour...23 {
+                indexMass.append(i)
+            }
+            for k in 0..<currentHour {
+                indexMass.append(k)
+            }
         }
     }
 
