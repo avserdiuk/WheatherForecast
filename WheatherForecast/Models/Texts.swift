@@ -132,3 +132,33 @@ func getUvIndex(_ uvIndex : Int) -> String {
         return "нет данных"
     }
 }
+func getCurrentHour() -> Int {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH"
+    let dateInFormat = dateFormatter.string(from: NSDate() as Date)
+    return Int(dateInFormat)!
+}
+
+func getCurrentHourAt3h() -> Int {
+    let currentHour = getCurrentHour()
+    switch currentHour {
+    case 0...2:
+        return 0
+    case 3...5:
+        return 3
+    case 6...8:
+        return 6
+    case 9...11:
+        return 9
+    case 12...14:
+        return 12
+    case 15...17:
+        return 15
+    case 18...20:
+        return 18
+    case 21...23:
+        return 21
+    default:
+        return 0
+    }
+}

@@ -9,8 +9,6 @@ import UIKit
 
 class CustomTable24hViewCell: UITableViewCell {
 
-    var hour : [Int] = [0,3,6,9,12,15,18,21]
-
     private lazy var wrapperView = CVView()
 
     private lazy var mainStackView = CVStackView(axis: .vertical, spacing: 8)
@@ -44,50 +42,30 @@ class CustomTable24hViewCell: UITableViewCell {
 
         setViews()
         setConstraints()
-
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(_ wheather : Wheather, _ indexPath: IndexPath){
+    func setup(_ wheather : Wheather, _ indexPath: IndexPath, _ indexMassive: [Int]){
 
-        dateLabel.text = getTime(unixtime: wheather.forecasts[0].unixtime)
-        timeLabel.text = "\(hour[indexPath.item]):00"
-        degreeLabel.text = "\(wheather.forecasts[0].hours[hour[indexPath.item]].temp)"
-        add1Label.text = "\(getCondition(wheather.forecasts[0].hours[hour[indexPath.item]].condition)), по ощущению \(wheather.forecasts[0].hours[hour[indexPath.item]].feelsLike)"
-        add22Label.text = "\(wheather.forecasts[0].hours[hour[indexPath.item]].windSpeed) м/с \(getWindDir(wheather.forecasts[0].hours[hour[indexPath.item]].windDir))"
-        add33Label.text = "\(Int(wheather.forecasts[0].hours[hour[indexPath.item]].precipitation*100))%"
-        add44Label.text = "\(Int(wheather.forecasts[0].hours[hour[indexPath.item]].cloudness*100))%"
+        let currentHour = getCurrentHourAt3h()
+        var forecastIndex = 0
 
-    }
+        if currentHour > indexMassive[indexPath.item] {
+            forecastIndex = 1
+        }
 
-    func getIndixesMass(){
+        let item = wheather.forecasts[forecastIndex].hours[indexMassive[indexPath.item]]
 
-        let currentHour = getCurrentHour()
-
-            switch currentHour {
-            case 0...2:
-                hour = [0,3,6,9,12,15,18,21]
-            case 3...5:
-                hour = [3,6,9,12,15,18,21,0]
-            case 6...8:
-                hour = [6,9,12,15,18,21,0,3]
-            case 9...11:
-                hour = [9,12,15,18,21,0,3,6]
-            case 12...14:
-                hour = [12,15,18,21,0,3,6,9]
-            case 15...17:
-                hour = [15,18,21,0,3,6,9,12]
-            case 18...20:
-                hour = [18,21,0,3,6,9,12,15]
-            case 21...23:
-                hour = [21,0,3,6,9,12,15,18]
-            default:
-                return
-            }
-
+        dateLabel.text = getTime(unixtime: wheather.forecasts[forecastIndex].unixtime)
+        timeLabel.text = "\(indexMassive[indexPath.item]):00"
+        degreeLabel.text = "\(item.temp)"
+        add1Label.text = "\(getCondition(item.condition)), по ощущению \(item.feelsLike)"
+        add22Label.text = "\(item.windSpeed) м/с \(getWindDir(item.windDir))"
+        add33Label.text = "\(Int(item.precipitation*100))%"
+        add44Label.text = "\(Int(item.cloudness*100))%"
     }
 
     func getCurrentHour() -> Int {
@@ -145,7 +123,7 @@ class CustomTable24hViewCell: UITableViewCell {
             timeLabel.heightAnchor.constraint(equalToConstant: 19),
 
             add1StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 33),
-            add1StackView.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 88),
+            add1StackView.leftAnchor.constraint(equalTo: wrapperView.leftAnchor, constant: 58),
 
             add2StackView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 33),
             add2StackView.leftAnchor.constraint(equalTo: add1StackView.rightAnchor, constant: 10),
