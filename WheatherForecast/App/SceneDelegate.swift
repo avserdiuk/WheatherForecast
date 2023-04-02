@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var rootController: UIViewController?
+    let param = UserDefaults.standard.bool(forKey: "isFirstOpenApp") // default = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -17,9 +19,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
+
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: PageViewController())
+
+        if param == false {
+            rootController = PermissionViewController()
+            UserDefaults.standard.set(true, forKey: "isFirstOpenApp")
+        } else {
+            rootController = PageViewController()
+        }
+
+        window?.rootViewController = UINavigationController(rootViewController: rootController ?? UIViewController())
         window?.makeKeyAndVisible()
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
