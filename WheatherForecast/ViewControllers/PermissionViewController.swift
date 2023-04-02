@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PermissionViewController: UIViewController {
+
+    private lazy var locationManager : CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.delegate = self
+        return manager
+    }()
 
     private lazy var imageView = CVImage(imageName: "permissionImage")
 
@@ -55,8 +62,10 @@ class PermissionViewController: UIViewController {
         setViews()
         setConstraints()
 
-        acceptButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
+        declineButton.addTarget(self, action: #selector(didTapDeclineButton), for: .touchUpInside)
     }
+
 
     func setViews(){
         view.addSubview(imageView)
@@ -101,7 +110,50 @@ class PermissionViewController: UIViewController {
         ])
     }
 
-    @objc func didTapButton(){
-        navigationController?.pushViewController(Forecast24ViewController(), animated: true)
+    @objc func didTapAcceptButton(){
+        locationManager.requestAlwaysAuthorization()
+    }
+
+    @objc func didTapDeclineButton(){
+        navigationController?.pushViewController(PageViewController(), animated: true)
+    }
+}
+
+
+extension PermissionViewController : CLLocationManagerDelegate {
+
+    func locationManagerDidChangeAuthorization(
+        _ manager: CLLocationManager
+    ) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.requestLocation()
+        case .denied, .restricted:
+            print("Определение локации невозможно")
+        case .notDetermined:
+            print("Определение локации не запрошено")
+        @unknown default:
+            fatalError()
+        }
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+        if let location = locations.first {
+            let controller = PageViewController()
+            controller.currentCoords = location.coordinate
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
+            print("Не удалось получить координаты")
+        }
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
+        // Handle failure to get a user’s location
     }
 }

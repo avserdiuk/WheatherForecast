@@ -84,7 +84,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
     }
 
     func getIndixesMass(){
-        let currentHour = getCurrentHour()-1
+        let currentHour = getCurrentHour()
 
         if currentHour == 0 {
             for i in currentHour...23 {

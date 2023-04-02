@@ -17,7 +17,8 @@ class CVLabel : UILabel {
         color: Colors = .textBlack,
         numberOfLines: Int = 1,
         textAlignment: NSTextAlignment = .left,
-        tag : Int = 0
+        tag : Int = 0,
+        isHidden : Bool = false
     ){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +28,7 @@ class CVLabel : UILabel {
         self.numberOfLines = numberOfLines
         self.textAlignment = textAlignment
         self.tag = tag
+        self.isHidden = isHidden
     }
 
     required init?(coder: NSCoder) {
@@ -65,11 +67,13 @@ class CVButton : UIButton {
 }
 
 class CVView : UIView {
-    init(backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0){
+    init(backgroundColor: Colors = .transparent, cornerRadius: CGFloat = 0, isHidden: Bool = false, alpha: CGFloat = 1){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = backgroundColor.color
         self.layer.cornerRadius = cornerRadius
+        self.isHidden = isHidden
+        self.alpha = alpha
     }
 
     required init?(coder: NSCoder) {

@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PageViewController: UIViewController {
 
     var number : Int = 3
     var currentNumber : Int = 1
+
+    var currentCity = UserDefaults.standard.string(forKey: "CurrentCity")
+    var currentCoords : CLLocationCoordinate2D?
+
+    private lazy var wrapperView = CVView(backgroundColor: .textBlack, isHidden: true, alpha: 0.5)
 
     private lazy var pageViewController : UIPageViewController = {
         let controller = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -27,6 +33,7 @@ class PageViewController: UIViewController {
         pageControl.currentPage = 0
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .systemGray2
+        pageControl.isHidden = true
         return pageControl
     }()
 
@@ -37,6 +44,8 @@ class PageViewController: UIViewController {
         return indicator
     }()
 
+    private lazy var informationLabel = CVLabel(text: "Вы не разрешили доступ к автоматическому определению вашего местоположения, добавьте город через меню справа", size: 16, weight: .semibold, color: Colors.textGray, numberOfLines: 0, textAlignment: .center, isHidden: true)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -45,17 +54,16 @@ class PageViewController: UIViewController {
         setViews()
         setConstraints()
 
-        NetworkManager().getWheater { wheather in
-            DispatchQueue.main.async {
 
-                let controller = MainViewController()
-                controller.viewController = self
-                controller.wheather = wheather
-                
-                self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
-                self.activityIndicator.stopAnimating()
-            }
+        if let currentCoords {
+            findUser(with: currentCoords)
+        } else if let currentCity {
+            findUser(with: currentCity)
+        } else {
+            activityIndicator.stopAnimating()
+            informationLabel.isHidden = false
         }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,11 +71,57 @@ class PageViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
 
+    func findUser(with currentCity : String) {
+        getWheather(currentCity)
+    }
+
+    func findUser(with currentCoords : CLLocationCoordinate2D){
+
+        let x = currentCoords.latitude
+        let y = currentCoords.longitude
+
+        NetworkManager().getDescriptionWithCoords((x,y)) { desc in
+            UserDefaults.standard.set("\(desc)", forKey: "CurrentCity") // костылёк (=
+            NetworkManager().getWheater(coordinates: (y,x)) { wheather in
+                DispatchQueue.main.async {
+                    self.title = desc
+
+                    let controller = MainViewController()
+                    controller.viewController = self
+                    controller.wheather = wheather
+
+                    self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
+                    self.pageControl.isHidden = false
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+        }
+
+    }
+
+    func getWheather(_ city: String){
+        NetworkManager().getCoordsWithString(city) { desc, coords in
+            NetworkManager().getWheater(coordinates: coords) { wheather in
+                DispatchQueue.main.async {
+                    self.title = desc
+
+                    let controller = MainViewController()
+                    controller.viewController = self
+                    controller.wheather = wheather
+
+                    self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
+                    self.pageControl.isHidden = false
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+        }
+    }
+
+
     func setNavigationBar(){
-        title = "Омск, Россия"
 
         let menu = UIBarButtonItem(image: UIImage(named: "menu"), style: .done, target: self, action: #selector(showMenu))
-        let point = UIBarButtonItem(image: UIImage(named: "point"), style: .done, target: self, action: #selector(showGeo))
+        let point = UIBarButtonItem(image: UIImage(named: "point"), style: .done, target: self, action: #selector(showAlert))
         navigationItem.leftBarButtonItems = [menu]
         navigationItem.rightBarButtonItems = [point]
         navigationController?.navigationBar.tintColor = .black
@@ -75,13 +129,22 @@ class PageViewController: UIViewController {
     }
 
     func setViews(){
+        view.addSubview(informationLabel)
         view.addSubview(activityIndicator)
         view.addSubview(pageControl)
         view.addSubview(pageViewController.view)
+        view.addSubview(wrapperView)
+
     }
 
     func setConstraints(){
         NSLayoutConstraint.activate([
+
+            wrapperView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            wrapperView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            wrapperView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            wrapperView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
 
@@ -92,6 +155,11 @@ class PageViewController: UIViewController {
 
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            informationLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            informationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            informationLabel.widthAnchor.constraint(equalToConstant: 250),
+
         ])
     }
 
@@ -100,9 +168,31 @@ class PageViewController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    @objc func showGeo(){
-        let controller = PermissionViewController()
-        navigationController?.pushViewController(controller, animated: true)
+    @objc func showAlert(){
+        wrapperView.isHidden = false
+
+        let alert = UIAlertController(title: "Добавить новый город", message: "например \"Омск\"", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+            textField.placeholder = "Введите ваш город:"
+        }
+
+        alert.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            guard let city = textField?.text else { return }
+
+            UserDefaults.standard.set("\(city)", forKey: "CurrentCity")
+            self.informationLabel.isHidden = true
+            self.activityIndicator.startAnimating()
+            self.getWheather(city)
+            self.wrapperView.isHidden = true
+        }))
+
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+            self.wrapperView.isHidden = true
+        }))
+
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
@@ -113,10 +203,11 @@ extension PageViewController : UIPageViewControllerDataSource {
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-       nil
+        nil
     }
 }
 
 extension PageViewController : UIPageViewControllerDelegate {
 
 }
+
