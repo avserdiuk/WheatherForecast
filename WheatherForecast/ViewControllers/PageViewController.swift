@@ -14,7 +14,13 @@ class PageViewController: UIViewController {
     var currentNumber : Int = 1
 
     var currentCity = UserDefaults.standard.string(forKey: "CurrentCity")
-    var currentCoords : CLLocationCoordinate2D?
+    var currentCoords : [Double]? = UserDefaults.standard.object(forKey: "CurrentCoords") as? [Double]
+
+    private lazy var locationManager : CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.delegate = self
+        return manager
+    }()
 
     private lazy var wrapperView = CVView(backgroundColor: .textBlack, isHidden: true, alpha: 0.5)
 
@@ -44,7 +50,7 @@ class PageViewController: UIViewController {
         return indicator
     }()
 
-    private lazy var informationLabel = CVLabel(text: "Вы не разрешили доступ к автоматическому определению вашего местоположения, добавьте город через меню справа", size: 16, weight: .semibold, color: Colors.textGray, numberOfLines: 0, textAlignment: .center, isHidden: true)
+    private lazy var informationLabel = CVLabel(text: pageDescription, size: 16, weight: .semibold, color: Colors.textGray, numberOfLines: 0, textAlignment: .center, isHidden: true)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +60,6 @@ class PageViewController: UIViewController {
         setViews()
         setConstraints()
 
-
         if let currentCoords {
             findUser(with: currentCoords)
         } else if let currentCity {
@@ -63,22 +68,22 @@ class PageViewController: UIViewController {
             activityIndicator.stopAnimating()
             informationLabel.isHidden = false
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        locationManager.requestLocation()
     }
 
     func findUser(with currentCity : String) {
         getWheather(currentCity)
     }
 
-    func findUser(with currentCoords : CLLocationCoordinate2D){
+    func findUser(with currentCoords : [Double]){
 
-        let x = currentCoords.latitude
-        let y = currentCoords.longitude
+        let x = currentCoords[1]
+        let y = currentCoords[0]
 
         NetworkManager().getDescriptionWithCoords((x,y)) { desc in
             UserDefaults.standard.set("\(desc)", forKey: "CurrentCity") // костылёк (=
@@ -116,7 +121,6 @@ class PageViewController: UIViewController {
             }
         }
     }
-
 
     func setNavigationBar(){
 
@@ -211,3 +215,26 @@ extension PageViewController : UIPageViewControllerDelegate {
 
 }
 
+extension PageViewController : CLLocationManagerDelegate {
+
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+
+        if let location = locations.first {
+            let lon = location.coordinate.longitude
+            let lat = location.coordinate.latitude
+            UserDefaults.standard.set([lon,lat], forKey: "CurrentCoords")
+        } else {
+            print("Не удалось получить координаты")
+        }
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
+    }
+}

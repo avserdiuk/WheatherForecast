@@ -141,9 +141,13 @@ extension PermissionViewController : CLLocationManagerDelegate {
         _ manager: CLLocationManager,
         didUpdateLocations locations: [CLLocation]
     ) {
+
         if let location = locations.first {
+            let lon = location.coordinate.longitude
+            let lat = location.coordinate.latitude
+            
             let controller = PageViewController()
-            controller.currentCoords = location.coordinate
+            controller.currentCoords = [lon, lat]
             navigationController?.pushViewController(controller, animated: true)
         } else {
             print("Не удалось получить координаты")
@@ -154,6 +158,5 @@ extension PermissionViewController : CLLocationManagerDelegate {
         _ manager: CLLocationManager,
         didFailWithError error: Error
     ) {
-        // Handle failure to get a user’s location
     }
 }
