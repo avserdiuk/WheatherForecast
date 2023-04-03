@@ -50,7 +50,7 @@ class PageViewController: UIViewController {
         return indicator
     }()
 
-    private lazy var informationLabel = CVLabel(text: "Вы не разрешили доступ к автоматическому определению вашего местоположения, добавьте город через меню справа", size: 16, weight: .semibold, color: Colors.textGray, numberOfLines: 0, textAlignment: .center, isHidden: true)
+    private lazy var informationLabel = CVLabel(text: pageDescription, size: 16, weight: .semibold, color: Colors.textGray, numberOfLines: 0, textAlignment: .center, isHidden: true)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,6 @@ class PageViewController: UIViewController {
             activityIndicator.stopAnimating()
             informationLabel.isHidden = false
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -122,7 +121,6 @@ class PageViewController: UIViewController {
             }
         }
     }
-
 
     func setNavigationBar(){
 

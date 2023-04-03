@@ -39,9 +39,6 @@ class MainViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-    }
 }
 
 extension MainViewController : UITableViewDataSource {
