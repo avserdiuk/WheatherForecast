@@ -45,6 +45,7 @@
 		418CF8ED29DB5B9000EAA5F5 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536C29CEFFC300266E69 /* Rubik-Bold.ttf */; };
 		418CF8EE29DB5B9000EAA5F5 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */; };
 		418CF8EF29DB5B9000EAA5F5 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */; };
+		41995DB929DD8E040036AA7B /* WheatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41995DB829DD8E030036AA7B /* WheatherViewController.swift */; };
 		41D9555E29C99DFD0000CFAB /* CustomTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */; };
 		41D9556029C9F6FB0000CFAB /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */; };
 		41D9556229C9FD3D0000CFAB /* CustomSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */; };
@@ -112,6 +113,7 @@
 		418CF8DC29DB520E00EAA5F5 /* WheaterForecastExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheaterForecastExtension.swift; sourceTree = "<group>"; };
 		418CF8DE29DB520E00EAA5F5 /* WheaterForecastExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WheaterForecastExtension.intentdefinition; sourceTree = "<group>"; };
 		418CF8DF29DB520F00EAA5F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		41995DB829DD8E030036AA7B /* WheatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheatherViewController.swift; sourceTree = "<group>"; };
 		41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableHeader.swift; sourceTree = "<group>"; };
 		41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSectionHeader.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				4171257A29C8624900CCE6D4 /* MainViewController.swift */,
 				41E8171929CB8804003665CD /* Forecast24ViewController.swift */,
 				414B535429CDC02B00266E69 /* DailyWheatherViewController.swift */,
+				41995DB829DD8E030036AA7B /* WheatherViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				41D9556229C9FD3D0000CFAB /* CustomSectionHeader.swift in Sources */,
 				4171258329C868BC00CCE6D4 /* Texts.swift in Sources */,
 				414B537629D3328300266E69 /* WheatherModel.swift in Sources */,
+				41995DB929DD8E040036AA7B /* WheatherViewController.swift in Sources */,
 				414B535329CCBF5700266E69 /* CustomTable24hViewCell.swift in Sources */,
 				4171258029C8639000CCE6D4 /* Colors.swift in Sources */,
 				414B535529CDC02B00266E69 /* DailyWheatherViewController.swift in Sources */,
