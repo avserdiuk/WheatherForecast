@@ -11,8 +11,9 @@ import CoreLocation
 class PageViewController: UIViewController {
 
     // массив с данными для контроллеров
-    var texts : [String] = ["Омск, Россия", "Москва, Россия", "Тбилиси, Грузия", "Сочи, Россия", "Адлер, Россия", "Пермь, Россия"]
+   // var points : [String] = ["Омск, Россия", "Москва, Россия", "Тбилиси, Грузия", "Сочи, Россия", "Адлер, Россия", "Пермь, Россия"]
 
+    var points : [String] = UserDefaults.standard.object(forKey: "Points") as? [String] ?? []
     var wheathers : [Wheather] = []
 
     // массив с контроллерами для пейджконтроллера
@@ -22,7 +23,7 @@ class PageViewController: UIViewController {
         return controllers
     }()
 
-    var currentCity = UserDefaults.standard.string(forKey: "CurrentCity")
+    //var currentCity = UserDefaults.standard.string(forKey: "CurrentCity")
     var currentCoords : [Double]? = UserDefaults.standard.object(forKey: "CurrentCoords") as? [Double]
 
     private lazy var locationManager : CLLocationManager = {
@@ -44,7 +45,7 @@ class PageViewController: UIViewController {
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.numberOfPages = self.texts.count
+        pageControl.numberOfPages = self.points.count
         pageControl.currentPage = 0
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .systemGray2
@@ -69,29 +70,15 @@ class PageViewController: UIViewController {
         setViews()
         setConstraints()
 
-
-        let myGroup = DispatchGroup()
-
-        texts.forEach {
-            myGroup.enter()
-            NetworkManager().getCoordsWithString($0) { desc, coords in
-                NetworkManager().getWheater(coordinates: coords) { wheather in
-                    DispatchQueue.main.async {
-                        self.wheathers.append(wheather)
-                        print("Finished request")
-                        myGroup.leave()
-                    }
-                }
-            }
+        if points.isEmpty {
+            activityIndicator.stopAnimating()
+            informationLabel.isHidden = false
+        } else {
+            showWheather()
         }
 
-        myGroup.notify(queue: .main) {
-            self.pageControl.isHidden = false
-            self.activityIndicator.stopAnimating()
-            print("Finished all requests.")
-            self.title = self.texts[0]
-            self.pageViewController.setViewControllers([self.controllers[0]], direction: .forward, animated: true)
-        }
+
+
 
 
 
@@ -120,7 +107,56 @@ class PageViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         locationManager.requestLocation()
 
-        
+    }
+
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        let viewControllers: [UIViewController] = [UIViewController()]
+//        if let pageViewController = parent as? UIPageViewController {
+//            pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+//           }
+//    }
+
+    func showWheather(){
+        self.activityIndicator.startAnimating()
+        let myGroup = DispatchGroup()
+        wheathers = []
+        points.forEach {
+            myGroup.enter()
+            NetworkManager().getCoordsWithString($0) { desc, coords in
+                NetworkManager().getWheater(coordinates: coords) { wheather in
+                    DispatchQueue.main.async {
+                        self.wheathers.append(wheather)
+                        print("Finished request")
+                        myGroup.leave()
+                    }
+                }
+            }
+        }
+
+        myGroup.notify(queue: .main) {
+            self.pageControl.isHidden = false
+            self.activityIndicator.stopAnimating()
+            print("Finished all requests.")
+
+            self.controllers = []
+            self.wheathers.forEach {
+                self.controllers.append(WheatherViewController(wheather: $0, viewController: self))
+            }
+
+            self.pageViewController.setViewControllers([self.controllers[self.controllers.count-1]], direction: .forward, animated: true)
+
+            self.title = self.points[self.controllers.count-1]
+
+            self.pageControl.numberOfPages = self.points.count
+            self.pageControl.currentPage = self.points.count
+
+            print(self.points.count)
+            print(self.wheathers.count)
+            print(self.controllers.count)
+            
+        }
     }
 
 
@@ -233,11 +269,18 @@ class PageViewController: UIViewController {
             let textField = alert?.textFields![0]
             guard let city = textField?.text else { return }
 
-            UserDefaults.standard.set("\(city)", forKey: "CurrentCity")
+            self.points.append(city)
+            UserDefaults.standard.set(self.points, forKey: "Points")
+
             self.informationLabel.isHidden = true
+            self.wrapperView.isHidden = true
+
+            self.viewDidLoad()
+
+
+            //UserDefaults.standard.set("\(city)", forKey: "CurrentCity")
             //self.activityIndicator.startAnimating()
             //self.getWheather(city)
-            self.wrapperView.isHidden = true
         }))
 
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
@@ -251,6 +294,7 @@ class PageViewController: UIViewController {
 
 extension PageViewController : UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+
         guard let viewController = viewController as? WheatherViewController else {return nil}
         if let index = controllers.firstIndex(of: viewController) {
             if index > 0 {
@@ -261,8 +305,12 @@ extension PageViewController : UIPageViewControllerDataSource, UIPageViewControl
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+
         guard let viewController = viewController as? WheatherViewController else {return nil}
+        print("controller", viewController)
+        print("controllers", controllers)
         if let index = controllers.firstIndex(of: viewController) {
+            print("index",index)
             if index < controllers.count - 1 {
                 return controllers[index+1]
             }
@@ -272,9 +320,9 @@ extension PageViewController : UIPageViewControllerDataSource, UIPageViewControl
 
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         if let index = controllers.firstIndex(of: pendingViewControllers[0]){
-            self.title = texts[index]
+            self.title = points[index]
             self.pageControl.currentPage = index
-            
+
         }
     }
 }

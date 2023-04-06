@@ -13,14 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var rootController: UIViewController?
     let param = UserDefaults.standard.bool(forKey: "isFirstOpenApp") // default = false
 
-    // массив с данными для контроллеров
-    var texts : [String] = ["Омск", "Москва", "Тбилиси", "Сочи"]
-    var wheathers : [Wheather] = []
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
+
+        //UserDefaults.standard.set([], forKey: "Points")
 
         if param == false {
             rootController = PermissionViewController()
