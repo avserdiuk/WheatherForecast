@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-        //UserDefaults.standard.set([], forKey: "Points")
+        //UserDefaults.standard.set([], forKey: "Locations")
 
         if param == false {
             rootController = PermissionViewController()

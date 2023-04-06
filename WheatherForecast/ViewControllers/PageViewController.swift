@@ -10,26 +10,13 @@ import CoreLocation
 
 class PageViewController: UIViewController {
 
-    // массив с данными для контроллеров
-   // var points : [String] = ["Омск, Россия", "Москва, Россия", "Тбилиси, Грузия", "Сочи, Россия", "Адлер, Россия", "Пермь, Россия"]
-
-    var points : [String] = UserDefaults.standard.object(forKey: "Points") as? [String] ?? []
+    var locations : [String] = UserDefaults.standard.object(forKey: "Locations") as? [String] ?? []
     var wheathers : [Wheather] = []
 
-    // массив с контроллерами для пейджконтроллера
     lazy var controllers : [UIViewController] = {
         var controllers : [UIViewController] = []
         wheathers.forEach { controllers.append(WheatherViewController(wheather: $0, viewController: self))}
         return controllers
-    }()
-
-    //var currentCity = UserDefaults.standard.string(forKey: "CurrentCity")
-    var currentCoords : [Double]? = UserDefaults.standard.object(forKey: "CurrentCoords") as? [Double]
-
-    private lazy var locationManager : CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.delegate = self
-        return manager
     }()
 
     private lazy var wrapperView = CVView(backgroundColor: .textBlack, isHidden: true, alpha: 0.5)
@@ -45,7 +32,7 @@ class PageViewController: UIViewController {
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.numberOfPages = self.points.count
+        pageControl.numberOfPages = self.locations.count
         pageControl.currentPage = 0
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .systemGray2
@@ -70,65 +57,31 @@ class PageViewController: UIViewController {
         setViews()
         setConstraints()
 
-        if points.isEmpty {
+        if locations.isEmpty {
             activityIndicator.stopAnimating()
             informationLabel.isHidden = false
         } else {
             showWheather()
         }
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-        //        if let currentCoords {
-        //            findUser(with: currentCoords)
-        //        } else if let currentCity {
-        //            findUser(with: currentCity)
-        //        } else {
-        //            activityIndicator.stopAnimating()
-        //            informationLabel.isHidden = false
-        //        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        locationManager.requestLocation()
-
     }
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        let viewControllers: [UIViewController] = [UIViewController()]
-//        if let pageViewController = parent as? UIPageViewController {
-//            pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-//           }
-//    }
 
     func showWheather(){
         self.activityIndicator.startAnimating()
+
         let myGroup = DispatchGroup()
+
         wheathers = []
-        points.forEach {
+        locations.forEach {
             myGroup.enter()
             NetworkManager().getCoordsWithString($0) { desc, coords in
                 NetworkManager().getWheater(coordinates: coords) { wheather in
                     DispatchQueue.main.async {
                         self.wheathers.append(wheather)
-                        print("Finished request")
                         myGroup.leave()
                     }
                 }
@@ -138,7 +91,6 @@ class PageViewController: UIViewController {
         myGroup.notify(queue: .main) {
             self.pageControl.isHidden = false
             self.activityIndicator.stopAnimating()
-            print("Finished all requests.")
 
             self.controllers = []
             self.wheathers.forEach {
@@ -147,64 +99,13 @@ class PageViewController: UIViewController {
 
             self.pageViewController.setViewControllers([self.controllers[self.controllers.count-1]], direction: .forward, animated: true)
 
-            self.title = self.points[self.controllers.count-1]
+            self.title = self.locations[self.controllers.count-1]
 
-            self.pageControl.numberOfPages = self.points.count
-            self.pageControl.currentPage = self.points.count
-
-            print(self.points.count)
-            print(self.wheathers.count)
-            print(self.controllers.count)
+            self.pageControl.numberOfPages = self.locations.count
+            self.pageControl.currentPage = self.locations.count
             
         }
     }
-
-
-    //    func findUser(with currentCity : String) {
-    //        getWheather(currentCity)
-    //    }
-
-    //    func findUser(with currentCoords : [Double]){
-    //
-    //        let x = currentCoords[1]
-    //        let y = currentCoords[0]
-    //
-    //        NetworkManager().getDescriptionWithCoords((x,y)) { desc in
-    //            UserDefaults.standard.set("\(desc)", forKey: "CurrentCity") // костылёк (=
-    //            NetworkManager().getWheater(coordinates: (y,x)) { wheather in
-    //                DispatchQueue.main.async {
-    //                    self.title = desc
-    //
-    //                    let controller = MainViewController()
-    //                    controller.viewController = self
-    //                    controller.wheather = wheather
-    //
-    //                    self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
-    //                    //self.pageControl.isHidden = false
-    //                    //self.activityIndicator.stopAnimating()
-    //                }
-    //            }
-    //        }
-    //
-    //    }
-
-    //    func getWheather(_ city: String){
-    //        NetworkManager().getCoordsWithString(city) { desc, coords in
-    //            NetworkManager().getWheater(coordinates: coords) { wheather in
-    //                DispatchQueue.main.async {
-    //                    self.title = desc
-    //
-    //                    let controller = MainViewController()
-    //                    controller.viewController = self
-    //                    controller.wheather = wheather
-    //
-    //                    self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
-    //                    //self.pageControl.isHidden = false
-    //                    self.activityIndicator.stopAnimating()
-    //                }
-    //            }
-    //        }
-    //    }
 
     func setNavigationBar(){
 
@@ -269,18 +170,17 @@ class PageViewController: UIViewController {
             let textField = alert?.textFields![0]
             guard let city = textField?.text else { return }
 
-            self.points.append(city)
-            UserDefaults.standard.set(self.points, forKey: "Points")
+            NetworkManager().getCoordsWithString(city) { desc, coords in
+                self.locations.append(desc)
+                UserDefaults.standard.set(self.locations, forKey: "Locations")
 
-            self.informationLabel.isHidden = true
-            self.wrapperView.isHidden = true
+                DispatchQueue.main.async {
+                    self.informationLabel.isHidden = true
+                    self.wrapperView.isHidden = true
+                    self.viewDidLoad()
+                }
+            }
 
-            self.viewDidLoad()
-
-
-            //UserDefaults.standard.set("\(city)", forKey: "CurrentCity")
-            //self.activityIndicator.startAnimating()
-            //self.getWheather(city)
         }))
 
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
@@ -307,10 +207,7 @@ extension PageViewController : UIPageViewControllerDataSource, UIPageViewControl
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
         guard let viewController = viewController as? WheatherViewController else {return nil}
-        print("controller", viewController)
-        print("controllers", controllers)
         if let index = controllers.firstIndex(of: viewController) {
-            print("index",index)
             if index < controllers.count - 1 {
                 return controllers[index+1]
             }
@@ -320,32 +217,9 @@ extension PageViewController : UIPageViewControllerDataSource, UIPageViewControl
 
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         if let index = controllers.firstIndex(of: pendingViewControllers[0]){
-            self.title = points[index]
+            self.title = locations[index]
             self.pageControl.currentPage = index
 
         }
-    }
-}
-
-extension PageViewController : CLLocationManagerDelegate {
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
-
-        if let location = locations.first {
-            let lon = location.coordinate.longitude
-            let lat = location.coordinate.latitude
-            UserDefaults.standard.set([lon,lat], forKey: "CurrentCoords")
-        } else {
-            print("Не удалось получить координаты")
-        }
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didFailWithError error: Error
-    ) {
     }
 }

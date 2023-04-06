@@ -145,10 +145,13 @@ extension PermissionViewController : CLLocationManagerDelegate {
         if let location = locations.first {
             let lon = location.coordinate.longitude
             let lat = location.coordinate.latitude
-            
-            let controller = PageViewController()
-            controller.currentCoords = [lon, lat]
-            navigationController?.pushViewController(controller, animated: true)
+
+            NetworkManager().getDescriptionWithCoords((lat,lon)) { desc in
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set([desc], forKey: "Locations")
+                    self.navigationController?.pushViewController(PageViewController(), animated: true)
+                }
+            }
         } else {
             print("Не удалось получить координаты")
         }
