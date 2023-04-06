@@ -10,16 +10,13 @@ import CoreLocation
 
 class PageViewController: UIViewController {
 
-    var number : Int = 3
-    var currentNumber : Int = 1
+    var locations : [String] = UserDefaults.standard.object(forKey: "Locations") as? [String] ?? []
+    var wheathers : [Wheather] = []
 
-    var currentCity = UserDefaults.standard.string(forKey: "CurrentCity")
-    var currentCoords : [Double]? = UserDefaults.standard.object(forKey: "CurrentCoords") as? [Double]
-
-    private lazy var locationManager : CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.delegate = self
-        return manager
+    lazy var controllers : [UIViewController] = {
+        var controllers : [UIViewController] = []
+        wheathers.forEach { controllers.append(WheatherViewController(wheather: $0, viewController: self))}
+        return controllers
     }()
 
     private lazy var wrapperView = CVView(backgroundColor: .textBlack, isHidden: true, alpha: 0.5)
@@ -35,7 +32,7 @@ class PageViewController: UIViewController {
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.numberOfPages = 2
+        pageControl.numberOfPages = self.locations.count
         pageControl.currentPage = 0
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .systemGray2
@@ -60,65 +57,53 @@ class PageViewController: UIViewController {
         setViews()
         setConstraints()
 
-        if let currentCoords {
-            findUser(with: currentCoords)
-        } else if let currentCity {
-            findUser(with: currentCity)
-        } else {
+        if locations.isEmpty {
             activityIndicator.stopAnimating()
             informationLabel.isHidden = false
+        } else {
+            showWheather()
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        locationManager.requestLocation()
     }
 
-    func findUser(with currentCity : String) {
-        getWheather(currentCity)
-    }
+    func showWheather(){
+        self.activityIndicator.startAnimating()
 
-    func findUser(with currentCoords : [Double]){
+        let myGroup = DispatchGroup()
 
-        let x = currentCoords[1]
-        let y = currentCoords[0]
-
-        NetworkManager().getDescriptionWithCoords((x,y)) { desc in
-            UserDefaults.standard.set("\(desc)", forKey: "CurrentCity") // костылёк (=
-            NetworkManager().getWheater(coordinates: (y,x)) { wheather in
-                DispatchQueue.main.async {
-                    self.title = desc
-
-                    let controller = MainViewController()
-                    controller.viewController = self
-                    controller.wheather = wheather
-
-                    self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
-                    self.pageControl.isHidden = false
-                    self.activityIndicator.stopAnimating()
+        wheathers = []
+        locations.forEach {
+            myGroup.enter()
+            NetworkManager().getCoordsWithString($0) { desc, coords in
+                NetworkManager().getWheater(coordinates: coords) { wheather in
+                    DispatchQueue.main.async {
+                        self.wheathers.append(wheather)
+                        myGroup.leave()
+                    }
                 }
             }
         }
 
-    }
+        myGroup.notify(queue: .main) {
+            self.pageControl.isHidden = false
+            self.activityIndicator.stopAnimating()
 
-    func getWheather(_ city: String){
-        NetworkManager().getCoordsWithString(city) { desc, coords in
-            NetworkManager().getWheater(coordinates: coords) { wheather in
-                DispatchQueue.main.async {
-                    self.title = desc
-
-                    let controller = MainViewController()
-                    controller.viewController = self
-                    controller.wheather = wheather
-
-                    self.pageViewController.setViewControllers([controller], direction: .forward, animated: true)
-                    self.pageControl.isHidden = false
-                    self.activityIndicator.stopAnimating()
-                }
+            self.controllers = []
+            self.wheathers.forEach {
+                self.controllers.append(WheatherViewController(wheather: $0, viewController: self))
             }
+
+            self.pageViewController.setViewControllers([self.controllers[self.controllers.count-1]], direction: .forward, animated: true)
+
+            self.title = self.locations[self.controllers.count-1]
+
+            self.pageControl.numberOfPages = self.locations.count
+            self.pageControl.currentPage = self.locations.count
+            
         }
     }
 
@@ -185,11 +170,17 @@ class PageViewController: UIViewController {
             let textField = alert?.textFields![0]
             guard let city = textField?.text else { return }
 
-            UserDefaults.standard.set("\(city)", forKey: "CurrentCity")
-            self.informationLabel.isHidden = true
-            self.activityIndicator.startAnimating()
-            self.getWheather(city)
-            self.wrapperView.isHidden = true
+            NetworkManager().getCoordsWithString(city) { desc, coords in
+                self.locations.append(desc)
+                UserDefaults.standard.set(self.locations, forKey: "Locations")
+
+                DispatchQueue.main.async {
+                    self.informationLabel.isHidden = true
+                    self.wrapperView.isHidden = true
+                    self.viewDidLoad()
+                }
+            }
+
         }))
 
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
@@ -201,40 +192,34 @@ class PageViewController: UIViewController {
 
 }
 
-extension PageViewController : UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        nil
-    }
-
+extension PageViewController : UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        nil
-    }
-}
 
-extension PageViewController : UIPageViewControllerDelegate {
-
-}
-
-extension PageViewController : CLLocationManagerDelegate {
-
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
-
-        if let location = locations.first {
-            let lon = location.coordinate.longitude
-            let lat = location.coordinate.latitude
-            UserDefaults.standard.set([lon,lat], forKey: "CurrentCoords")
-        } else {
-            print("Не удалось получить координаты")
+        guard let viewController = viewController as? WheatherViewController else {return nil}
+        if let index = controllers.firstIndex(of: viewController) {
+            if index > 0 {
+                return controllers[index-1]
+            }
         }
+        return nil
     }
 
-    func locationManager(
-        _ manager: CLLocationManager,
-        didFailWithError error: Error
-    ) {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+
+        guard let viewController = viewController as? WheatherViewController else {return nil}
+        if let index = controllers.firstIndex(of: viewController) {
+            if index < controllers.count - 1 {
+                return controllers[index+1]
+            }
+        }
+        return nil
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if let index = controllers.firstIndex(of: pendingViewControllers[0]){
+            self.title = locations[index]
+            self.pageControl.currentPage = index
+
+        }
     }
 }
