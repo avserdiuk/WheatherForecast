@@ -11,6 +11,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
 
     weak var viewController : UIViewController?
     var wheather : Wheather?
+    var titleLabel : String?
     var indexMass : [Int] = []
 
     private lazy var wrapper = CVView()
@@ -116,6 +117,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         let controller = Forecast24ViewController()
         controller.viewController = viewController
         controller.wheather = wheather
+        controller.titleLabel.text = titleLabel
         viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 

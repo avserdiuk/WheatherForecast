@@ -22,7 +22,7 @@ class Forecast24ViewController: UIViewController {
     }()
 
     private lazy var backButtonTitleLabel = CVButton(title: forecast24BackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
-    private lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
+    lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
 
     private lazy var tableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)

@@ -27,7 +27,6 @@
 		4171256829C8503200CCE6D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256729C8503200CCE6D4 /* SceneDelegate.swift */; };
 		4171256A29C8503200CCE6D4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171256929C8503200CCE6D4 /* SettingViewController.swift */; };
 		4171256F29C8503200CCE6D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4171256E29C8503200CCE6D4 /* Assets.xcassets */; };
-		4171257B29C8624900CCE6D4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171257A29C8624900CCE6D4 /* MainViewController.swift */; };
 		4171257D29C8628A00CCE6D4 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */; };
 		4171258029C8639000CCE6D4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171257F29C8639000CCE6D4 /* Colors.swift */; };
 		4171258329C868BC00CCE6D4 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171258229C868BC00CCE6D4 /* Texts.swift */; };
@@ -101,7 +100,6 @@
 		4171256929C8503200CCE6D4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		4171256E29C8503200CCE6D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4171257329C8503200CCE6D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4171257A29C8624900CCE6D4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		4171257F29C8639000CCE6D4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4171258229C868BC00CCE6D4 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
@@ -147,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				4107EF7A29C8D87A009C24C1 /* CustomUIViews.swift */,
-				41E8171B29CB888D003665CD /* MainScreen */,
+				41E8171B29CB888D003665CD /* WheatherScreen */,
 				414B534F29CCBDCF00266E69 /* Forecast24 */,
 				414B535629CDC0E400266E69 /* DailyWheather */,
 			);
@@ -236,7 +234,6 @@
 				41D9556529CA031D0000CFAB /* PageViewController.swift */,
 				4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */,
 				4171256929C8503200CCE6D4 /* SettingViewController.swift */,
-				4171257A29C8624900CCE6D4 /* MainViewController.swift */,
 				41E8171929CB8804003665CD /* Forecast24ViewController.swift */,
 				414B535429CDC02B00266E69 /* DailyWheatherViewController.swift */,
 				41995DB829DD8E030036AA7B /* WheatherViewController.swift */,
@@ -284,7 +281,7 @@
 			path = WheaterForecastExtension;
 			sourceTree = "<group>";
 		};
-		41E8171B29CB888D003665CD /* MainScreen */ = {
+		41E8171B29CB888D003665CD /* WheatherScreen */ = {
 			isa = PBXGroup;
 			children = (
 				41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */,
@@ -292,7 +289,7 @@
 				41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */,
 				41D9556329C9FF530000CFAB /* CustomTableViewCell.swift */,
 			);
-			path = MainScreen;
+			path = WheatherScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,7 +424,6 @@
 				414B535B29CDC4C000266E69 /* CustomDailyWheatherCollectionViewCell.swift in Sources */,
 				414B535129CCBE2900266E69 /* CustomTable24hHeader.swift in Sources */,
 				41D9556629CA031D0000CFAB /* PageViewController.swift in Sources */,
-				4171257B29C8624900CCE6D4 /* MainViewController.swift in Sources */,
 				4171257D29C8628A00CCE6D4 /* PermissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

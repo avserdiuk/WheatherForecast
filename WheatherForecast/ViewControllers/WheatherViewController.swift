@@ -11,6 +11,7 @@ class WheatherViewController: UIViewController {
 
     weak var viewController : UIViewController?
     var wheather : Wheather?
+    var titleLabel: String?
 
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -29,13 +30,15 @@ class WheatherViewController: UIViewController {
 
         view.addSubview(tableView)
         setConstraints()
+
     }
 
 
-    init(wheather: Wheather, viewController : UIViewController) {
+    init(wheather: Wheather, viewController : UIViewController, titleLabel: String) {
         super.init(nibName: nil, bundle: nil)
         self.wheather = wheather
         self.viewController = viewController
+        self.titleLabel = titleLabel
     }
 
     required init?(coder: NSCoder) {
@@ -82,6 +85,7 @@ extension WheatherViewController : UITableViewDelegate {
             cell.viewController = self.viewController
             if let wheather = wheather {
                 cell.wheather = wheather
+                cell.titleLabel = titleLabel
                 cell.setup(wheather)
             }
             return cell
@@ -93,6 +97,7 @@ extension WheatherViewController : UITableViewDelegate {
         let controller = DailyWheatherViewController()
         controller.wheather = wheather
         controller.index = indexPath.row
+        controller.titleLabel.text = titleLabel
         viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 }

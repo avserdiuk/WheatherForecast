@@ -15,7 +15,9 @@ class PageViewController: UIViewController {
 
     lazy var controllers : [UIViewController] = {
         var controllers : [UIViewController] = []
-        wheathers.forEach { controllers.append(WheatherViewController(wheather: $0, viewController: self))}
+        self.wheathers.enumerated().forEach {
+            self.controllers.append(WheatherViewController(wheather: $1, viewController: self, titleLabel: self.locations[$0]))
+        }
         return controllers
     }()
 
@@ -93,8 +95,8 @@ class PageViewController: UIViewController {
             self.activityIndicator.stopAnimating()
 
             self.controllers = []
-            self.wheathers.forEach {
-                self.controllers.append(WheatherViewController(wheather: $0, viewController: self))
+            self.wheathers.enumerated().forEach {
+                self.controllers.append(WheatherViewController(wheather: $1, viewController: self, titleLabel: self.locations[$0]))
             }
 
             self.pageViewController.setViewControllers([self.controllers[self.controllers.count-1]], direction: .forward, animated: true)
