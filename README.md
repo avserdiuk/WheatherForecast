@@ -11,7 +11,7 @@ The weather forecast app is designed to display current weather conditions and f
   
   
   
-  
+  - Apple MVC
   - UIKit
   - SwiftUI (for widget)
   - Auto-Layout
