@@ -67,7 +67,7 @@ class NetworkManager {
         guard let url = URL(string: "https://api.weather.yandex.ru/v2/forecast?lat=\(coordinates.lon)&lon=\(coordinates.lat)&hours=true") else { return }
 
         var request = URLRequest(url: url)
-        request.addValue("cdb1cf02-d38f-4913-852e-af24e6951369", forHTTPHeaderField: "X-Yandex-API-Key")
+        request.addValue("6665563f-9e68-42d2-90c0-5976f1f3d85b", forHTTPHeaderField: "X-Yandex-API-Key")
 
         let task = urlSession.dataTask(with: request) { data, response, error in
 

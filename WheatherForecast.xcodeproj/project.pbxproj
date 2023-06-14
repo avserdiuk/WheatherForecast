@@ -45,6 +45,8 @@
 		418CF8EE29DB5B9000EAA5F5 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536B29CEFFC300266E69 /* Rubik-SemiBold.ttf */; };
 		418CF8EF29DB5B9000EAA5F5 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414B536D29CEFFC300266E69 /* Rubik-Regular.ttf */; };
 		41995DB929DD8E040036AA7B /* WheatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41995DB829DD8E030036AA7B /* WheatherViewController.swift */; };
+		41A72F8D2A38B1FB002B80B5 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A72F8C2A38B1FB002B80B5 /* PermissionView.swift */; };
+		41A72F8F2A39B194002B80B5 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A72F8E2A39B194002B80B5 /* SettingView.swift */; };
 		41D9555E29C99DFD0000CFAB /* CustomTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */; };
 		41D9556029C9F6FB0000CFAB /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */; };
 		41D9556229C9FD3D0000CFAB /* CustomSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */; };
@@ -112,6 +114,8 @@
 		418CF8DE29DB520E00EAA5F5 /* WheaterForecastExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WheaterForecastExtension.intentdefinition; sourceTree = "<group>"; };
 		418CF8DF29DB520F00EAA5F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41995DB829DD8E030036AA7B /* WheatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheatherViewController.swift; sourceTree = "<group>"; };
+		41A72F8C2A38B1FB002B80B5 /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		41A72F8E2A39B194002B80B5 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		41D9555D29C99DFD0000CFAB /* CustomTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableHeader.swift; sourceTree = "<group>"; };
 		41D9555F29C9F6FA0000CFAB /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		41D9556129C9FD3D0000CFAB /* CustomSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSectionHeader.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 		4107EF7C29C8DB42009C24C1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				41A72F8C2A38B1FB002B80B5 /* PermissionView.swift */,
+				41A72F8E2A39B194002B80B5 /* SettingView.swift */,
 				4107EF7A29C8D87A009C24C1 /* CustomUIViews.swift */,
 				41E8171B29CB888D003665CD /* WheatherScreen */,
 				414B534F29CCBDCF00266E69 /* Forecast24 */,
@@ -231,9 +237,9 @@
 		4171257929C8623500CCE6D4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				41D9556529CA031D0000CFAB /* PageViewController.swift */,
 				4171257C29C8628A00CCE6D4 /* PermissionViewController.swift */,
 				4171256929C8503200CCE6D4 /* SettingViewController.swift */,
+				41D9556529CA031D0000CFAB /* PageViewController.swift */,
 				41E8171929CB8804003665CD /* Forecast24ViewController.swift */,
 				414B535429CDC02B00266E69 /* DailyWheatherViewController.swift */,
 				41995DB829DD8E030036AA7B /* WheatherViewController.swift */,
@@ -406,6 +412,7 @@
 				414B537629D3328300266E69 /* WheatherModel.swift in Sources */,
 				41995DB929DD8E040036AA7B /* WheatherViewController.swift in Sources */,
 				414B535329CCBF5700266E69 /* CustomTable24hViewCell.swift in Sources */,
+				41A72F8D2A38B1FB002B80B5 /* PermissionView.swift in Sources */,
 				4171258029C8639000CCE6D4 /* Colors.swift in Sources */,
 				414B535529CDC02B00266E69 /* DailyWheatherViewController.swift in Sources */,
 				4171256629C8503200CCE6D4 /* AppDelegate.swift in Sources */,
@@ -424,6 +431,7 @@
 				414B535B29CDC4C000266E69 /* CustomDailyWheatherCollectionViewCell.swift in Sources */,
 				414B535129CCBE2900266E69 /* CustomTable24hHeader.swift in Sources */,
 				41D9556629CA031D0000CFAB /* PageViewController.swift in Sources */,
+				41A72F8F2A39B194002B80B5 /* SettingView.swift in Sources */,
 				4171257D29C8628A00CCE6D4 /* PermissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
