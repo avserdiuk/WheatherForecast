@@ -57,7 +57,6 @@ class WheatherViewController: UIViewController {
 
 }
 
-
 extension WheatherViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         2
