@@ -11,11 +11,19 @@ The weather forecast app is designed to display current weather conditions and f
   
   
   
+<<<<<<< HEAD
   
   - UIKit
   - SwiftUI (for widget)
   - Auto-Layout
   - Custom UIView's
+=======
+  - Apple MVC
+  - UIKit
+  - SwiftUI (for widget)
+  - Auto-Layout
+  - Smart View's (custom)
+>>>>>>> 1ea7fc5ce5d39e27a025587166aeff6e80917d17
   - UITableView, UICollectionView, and custom cells
   - UIPageController
   - Yandex Weather API

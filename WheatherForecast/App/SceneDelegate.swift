@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
+<<<<<<< HEAD
 
 
         //UserDefaults.standard.set([], forKey: "Locations")
@@ -25,12 +26,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        print(param)
 //        print(UserDefaults.standard.object(forKey: "Locations"))
 
+=======
+        //UserDefaults.standard.set([], forKey: "Locations")
+
+>>>>>>> 1ea7fc5ce5d39e27a025587166aeff6e80917d17
         if param == false {
             rootController = PermissionViewController()
             UserDefaults.standard.set(true, forKey: "isFirstOpenApp")
         } else {
             rootController = PageViewController()
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ea7fc5ce5d39e27a025587166aeff6e80917d17
         }
 
         window?.rootViewController = UINavigationController(rootViewController: rootController ?? UIViewController())
