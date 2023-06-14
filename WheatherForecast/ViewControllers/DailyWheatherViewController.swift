@@ -12,65 +12,21 @@ class DailyWheatherViewController: UIViewController {
     var wheather : Wheather?
     var index : Int = 0
 
-    private lazy var backButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "backArrow"), for: .normal)
-        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-        return button
-    }()
+    override func loadView() {
+        self.view = DailyWheatherView()
 
-    private lazy var backButtonTitleLabel = CVButton(title: dailyWheatherBackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
-    var titleLabel = CVLabel(text: "", size: 18, weight: .semibold)
+        view().backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        view().tableView.delegate = self
+        view().tableView.dataSource = self
+    }
 
-    lazy var tableView : UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = .clear
-        tableView.backgroundColor = .white
-        tableView.allowsSelection = false
-        return tableView
-    }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-
-        setViews()
-        setConstraints()
-
+    func view() -> DailyWheatherView {
+        return self.view as! DailyWheatherView
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-    }
-
-    func setViews(){
-        view.addSubview(backButton)
-        view.addSubview(backButtonTitleLabel)
-        view.addSubview(titleLabel)
-        view.addSubview(tableView)
-    }
-
-    func setConstraints(){
-        NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
-
-            backButtonTitleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            backButtonTitleLabel.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 20),
-
-            titleLabel.topAnchor.constraint(equalTo: backButtonTitleLabel.bottomAnchor, constant: 10),
-            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 48),
-
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-        ])
     }
 
     @objc func didTapBackButton(){

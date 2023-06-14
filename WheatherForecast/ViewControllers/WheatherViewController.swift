@@ -97,7 +97,7 @@ extension WheatherViewController : UITableViewDelegate {
         let controller = DailyWheatherViewController()
         controller.wheather = wheather
         controller.index = indexPath.row
-        controller.titleLabel.text = titleLabel
+        controller.view().titleLabel.text = titleLabel
         viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 }

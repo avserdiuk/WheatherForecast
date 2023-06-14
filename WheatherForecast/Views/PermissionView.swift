@@ -81,7 +81,7 @@ final class PermissionView : UIView {
             titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 27),
             titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -27),
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
+            
             subtitle1Label.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 56),
             subtitle1Label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 31),
             subtitle1Label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -31),
