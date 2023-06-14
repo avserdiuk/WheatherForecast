@@ -13,35 +13,18 @@ class Forecast24ViewController: UIViewController {
     var wheather : Wheather?
     var indexMassive : [Int] = []
 
-    private lazy var backButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "backArrow"), for: .normal)
-        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-        return button
-    }()
+    override func loadView() {
+        self.view = Forecast24View()
 
-    private lazy var backButtonTitleLabel = CVButton(title: forecast24BackButtonTitleLabel, titleSize: 16, titleColor: .textGray)
-    lazy var titleLabel = CVLabel(text: "Омск, Россия", size: 18, weight: .semibold)
+        view().backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        view().tableView.dataSource = self
+        view().tableView.delegate = self
 
-    private lazy var tableView : UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = .clear
-        tableView.backgroundColor = .white
-        tableView.allowsSelection = false
-        return tableView
-    }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-
-        setViews()
-        setConstraints()
         indexMassive = getIndixesMass()
+    }
+
+    func view() -> Forecast24View {
+        return self.view as! Forecast24View
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,31 +52,6 @@ class Forecast24ViewController: UIViewController {
             }
         }
         return hours
-    }
-
-    func setViews(){
-        view.addSubview(backButton)
-        view.addSubview(backButtonTitleLabel)
-        view.addSubview(titleLabel)
-        view.addSubview(tableView)
-    }
-
-    func setConstraints(){
-        NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
-
-            backButtonTitleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            backButtonTitleLabel.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 20),
-
-            titleLabel.topAnchor.constraint(equalTo: backButtonTitleLabel.bottomAnchor, constant: 10),
-            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 48),
-
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-        ])
     }
 }
 

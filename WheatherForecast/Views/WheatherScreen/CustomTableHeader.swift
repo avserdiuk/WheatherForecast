@@ -117,7 +117,7 @@ class CustomTableHeader: UITableViewHeaderFooterView {
         let controller = Forecast24ViewController()
         controller.viewController = viewController
         controller.wheather = wheather
-        controller.titleLabel.text = titleLabel
+        controller.view().titleLabel.text = titleLabel
         viewController?.navigationController?.pushViewController(controller, animated: true)
     }
 
